@@ -1,0 +1,27 @@
+{% extends 'blog/nav.html' %}
+{% load static %}
+
+{% block content %}
+               
+        <img src='{{ staffs.photo.url }}'>
+        {{ staffs.name }} <br>
+        Class: {{ staffs.grade }} <br>
+        {{ staffs.gender }} <br>
+        {{ staffs.phone }} <br>
+        Age: {{ staffs.age }} Years <br>
+        Id Number: {{ staffs.id_number }} <br>
+        Next of Kin: {{ staffs.next_of_kin }} <br>
+        Kin's Contact: {{ staffs.kin_contact }} <br>
+        Salary: KES {{ staffs.salary }} <br>
+        Extra Roles: {{ staffs.role }} <br>
+        Recruitment Day: {{staffs.day_recruited}} <br>
+        Retirement Day: {{staffs.day_retirement}}<br>
+        Certified: {{ staffs.certified }} <br>
+        <br>
+       
+        
+<a href="/staffdelete/{{ staffs.id }}" class="btn btn-danger badge-pill"> Delete </a>
+<a href="/staff/{{ staffs.id }}/update" class="btn btn-primary badge-pill"> Update </a>
+        
+        <script src="" async defer></script>
+    {% endblock %}

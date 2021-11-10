@@ -1,0 +1,216 @@
+{% load static %}
+
+<!DOCTYPE html>
+<!-- Created by CodingLab |www.youtube.com/CodingLabYT-->
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <title> ERP </title>
+    <link rel="stylesheet" href="style.css">
+            <link rel="stylesheet" type='text/css' href="{% static 'blog/css/nav.css' %}">
+    <link rel="stylesheet" type='text/css' href="{% static 'blog/css/all.css' %}">
+    
+    <link rel="stylesheet" type='text/css' href="{% static 'blog/style.css' %}">
+    <link rel="stylesheet" type='text/css' href="{% static 'blog/css/bootstrap.css' %}">
+
+    <!-- Boxiocns CDN Link -->
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   </head>
+<body>
+  <div class="sidebar close">
+    <div class="logo-details">
+      <i class='fas fa-home'></i>
+      <span class="logo_name"> Greystone Preparatory </span>
+    </div>
+    <ul class="nav-links">
+      <li>
+        <a href="#">
+           <i class='fas fa-list'> </i>
+          <span class="link_name">Dashboard</span>
+        </a>
+        <ul class="sub-menu blank">
+          <li><a class="link_name" href="#">Dashboard</a></li>
+        </ul>
+      </li>
+      <li>
+        <div class="iocn-link">
+          <a href="#">
+            <i class='fas fa-user-graduate'> </i>
+            <span class="link_name">Students</span>
+          </a>
+          <i class='fas fa-angle-down arrow' ></i>
+        </div>
+        <ul class="sub-menu">
+            <li> <a class='link_name' href="{% url 'classlist' %}"> Students List </li>
+            <li> <a href="{% url 'addstudent' %}"> Add Student </li>
+            <li> <a href="{% url 'takeattendance' %}"> Take Attendance </li>
+            <li> <a href="{% url 'makeannouncement' %}"> Announce </li>
+            <li> <a href="{% url 'news' %}"> News </li>
+            <li> <a href="{% url 'feedback' %}"> Add Feedback </li>
+            <li> <a href="{% url 'feedbacklist' %}"> Feedback List </li>
+            <li> <a href="{% url 'classlist' %}"> Students List </li> 
+        </ul>
+      </li>
+      
+      <li>
+        <div class="iocn-link">
+          <a href="#">
+            <i class='fas fa-chalkboard-teacher'> </i>
+            <span class='link_name'> Staff </span>
+          </a>
+          <i class='fas fa-angle-down arrow' ></i>
+        </div>
+        <ul class="sub-menu">
+          <li> <a class='link_name' href='/staff/{{ details }}'> Staff List </li> 
+          <li> <a href='/addstaff/'> Add Staff </li>
+          <li> <a href='/staff/{{ details }}'> Staff List </li>  
+        </ul>
+      </li>
+
+            <li>
+        <div class="iocn-link">
+          <a href="#">
+            <i class='fas fa-money-bill'> </i>
+            <span class='link_name'> Finances </span>
+          </a>
+          <i class='fas fa-angle-down arrow' ></i>
+        </div>
+        <ul class="sub-menu">
+          <li><a class="link_name" href="#">Finances</a></li>
+            <li> <a href='/finances'> Add Payment </li> 
+            <li> <a href='/finances/paylist/'> Payment List </li>
+            <li> <a href='/finances/addexpense/'> Add Expense </li>                                
+        </ul>
+      </li>
+      
+
+
+
+      <li>
+        <a href="#">
+          <i class='fas fa-chart-bar'> </i>
+          <span class="link_name">Analytics</span>
+        </a>
+        <ul class="sub-menu blank">
+          <li><a class="link_name" href="#">Analytics</a></li>
+        </ul>
+      </li>
+      
+      <li>
+          <a href=''>
+          <i class='fas fa-cog'> </i>
+              <span class='link_name'> Settings </span>
+          </a>
+              <ul class='sub-menu blank'> 
+      <li> <a class='link_name' href='#'> Settings </li> 
+      </ul>
+      </li>
+
+
+      <li>
+          <a href=''>
+          <i class='fas fa-phone-alt'> </i>
+              <span class='link_name'> Support </span>
+          </a>
+              <ul class='sub-menu blank'> 
+      <li> <a class='link_name' href='#'> Support </li> 
+      </ul>
+      </li>
+
+
+
+      <li>
+        <div class="iocn-link">
+          <a href="#">
+            <i class='fas fa-phone-alt'></i>
+            <span class="link_name">Plugins</span>
+          </a>
+          <i class='bx bxs-chevron-down arrow' ></i>
+        </div>
+        <ul class="sub-menu">
+          <li><a class="link_name" href="#">Plugins</a></li>
+          <li><a href="#">UI Face</a></li>
+          <li><a href="#">Pigments</a></li>
+          <li><a href="#">Box Icons</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#">
+          <i class='fas fa-phone-alt' ></i>
+          <span class="link_name">Explore</span>
+        </a>
+        <ul class="sub-menu blank">
+          <li><a class="link_name" href="#">Explore</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#">
+          <i class='fas fa-phone-alt'></i>
+          <span class="link_name">History</span>
+        </a>
+        <ul class="sub-menu blank">
+          <li><a class="link_name" href="#">History</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#">
+          <i class='fas fa-plug' ></i>
+          <span class="link_name">Setting</span>
+        </a>
+        <ul class="sub-menu blank">
+          <li><a class="link_name" href="#">Setting</a></li>
+        </ul>
+      </li>
+      <li>
+    <div class="profile-details">
+      <div class="profile-content">
+        <img src="{{ staffs.photo.url }}" alt="profileImg">
+      </div>
+      <div class="name-job">
+        <div class="profile_name">Charles Gitau</div>
+        <div class="job">Django Developer</div>
+      </div>
+      <i class='fa fas-log-out' ></i>
+    </div>
+  </li>
+</ul>
+  </div>
+  <section class="home-section">
+    <div class="home-content">
+      <i class='fas fa-outdent bx-menu' ></i>
+      <span class="text">Drop Down Sidebar</span>
+    </div>
+
+    <div class='main-page'>
+      {% if messages %}
+        {% for message in messages %}
+            <div class='alert alert-{{ message.tags }}'>
+                {{ message }}
+            </div>
+        {% endfor %}
+       {% endif %}
+       
+        {% block  content %}
+
+        {% endblock %}
+      </div>
+
+  </section>
+  <script>
+  let arrow = document.querySelectorAll(".arrow");
+  for (var i = 0; i < arrow.length; i++) {
+    arrow[i].addEventListener("click", (e)=>{
+   let arrowParent = e.target.parentElement.parentElement;//selecting main parent of arrow
+   arrowParent.classList.toggle("showMenu");
+    });
+  }
+  let sidebar = document.querySelector(".sidebar");
+  let sidebarBtn = document.querySelector(".bx-menu");
+  console.log(sidebarBtn);
+  sidebarBtn.addEventListener("click", ()=>{
+    sidebar.classList.toggle("close");
+  });
+  </script>
+</body>
+</html>

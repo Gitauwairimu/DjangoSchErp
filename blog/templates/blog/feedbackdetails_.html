@@ -1,0 +1,15 @@
+{% extends 'blog/nav.html' %}
+{% load static %}
+
+{% block content %}
+
+{{ news.name }}
+{{ news.title }}
+{{ news.email }}
+{{ news.details }}
+
+
+<a href="/feedback/{{ news.id }}/delete/" class="btn btn-danger badge-pill"> Delete </a>
+
+
+{% endblock %}

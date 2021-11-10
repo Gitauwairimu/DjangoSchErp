@@ -1,0 +1,16 @@
+{% extends 'blog/nav.html' %}
+{% load static %}
+
+{% block content %}
+{{ studentdetails.student_name }}
+{{ studentdetails.extra_role }}
+{{ studentdetails.gender }}
+{{ studentdetails.dob }}
+{{ studentdetails.age }}
+{{ studentdetails.grade }}
+{{ studentdetails.parent_phone }}
+
+<a href="/studentdelete/{{ studentdetails.id }}/" class="btn btn-danger badge-pill"> Delete </a>
+<a href="/student/{{ studentdetails.id }}/update" class="btn btn-primary badge-pill"> Update </a>
+
+{% endblock %}

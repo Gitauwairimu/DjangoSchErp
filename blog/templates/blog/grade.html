@@ -1,0 +1,129 @@
+{% extends 'blog/nav.html' %}
+{% load static %}
+
+{% block content %}
+
+        <div class="container mt-3 mb-3">
+            <div class="jumbotron">
+                <div class="card">
+                    <div class="card-header">
+
+                   <h3> Students </h3>
+                    </div>
+                       
+
+                    <div>
+
+<hr>
+
+<div class='container'>
+
+    <div class='row'>
+                <div>
+                <nav class="navbar navbar-light bg-light">
+                    <form class="form-inline">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    </form>
+                </nav>
+            </div>
+    </div>
+
+    <div class='row cards'>
+
+        <div class='col-md-3'>
+            <div class='card'>
+                <div class='card-body'>
+                    <div class='card-text'>
+                        <h3> Total Students </h3>
+                        <h4> {{ nostudents }} <h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class='col-md-3'>
+            <div class='card'>
+                <div class='card-body'>
+                    <div class='card-text'>
+                        <h3> Girls </h3>
+                        <h4> {{ girls }} <h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class='col-md-3'>
+            <div class='card'>
+                <div class='card-body'>
+                    <div class='card-text'>
+                        <h3> Boys </h3>
+                        <h4> {{ boys }} <h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+
+
+<br>
+
+
+        <table class="table table-dark table-hover table-bordered table-striped table-responsive">
+            <thead>
+                <tr>
+                    <th scope="col"> Adm </th>
+                    <th scope="col"> Names </th>
+                    <th scope="col"> Gender </th>
+                    <th scope="col"> Age </th>
+                    <th scope="col"> Class </th>
+                </tr>
+
+            </thead>
+
+             <tbody>
+             {% for student in students %}
+                <tr>
+                    <th  scope="row"> {{ student.id }}</th>
+                    <td> <a href="/student/{{ student.id}}"> {{ student.student_name }} </a> </td>
+                    <td> {{ student.gender }} </td>
+                    <td> {{ student.age }} </td>
+                    <td> {{ student.grade }} </td>
+                    <td class="float-right">
+                        <a href="/student/{{ student.id}}" class="btn btn-primary badge-pill"> More </button>
+                        <a href="/student/{{ student.id}}/update" class="btn btn-danger badge-pill"> Update </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        
+
+            <tfooter>
+                <tr>
+                    <th scope="col"> Adm </th>
+                    <th scope="col"> Names </th>
+                    <th scope="col"> Gender </th>
+                    <th scope="col"> Age </th>
+                    <th scope="col"> Class </th>
+                </tr>
+
+            </tfooter>
+        
+        </table> 
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        
+        <script src="" async defer></script>
+{% endblock  %}

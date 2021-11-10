@@ -1,0 +1,24 @@
+{% extends 'blog/nav.html' %}
+{% load static %}
+
+{% block content %}
+<h1 style='text-align: center; '> Feedback </h1>
+
+             {% for feedback in feedbacks %}
+                {{ feedback.name }} <br>
+                {{ feedback.title }} <br>
+                {{ feedback.email }} <br>
+                {{ feedback.details }} <br>
+                <div class="float-right">
+                    <a href="/feedback/{{ feedback.id}}" class="btn btn-primary badge-pill"> Read </button>
+                    <a href="/feedback/{{ feedback.id }}/delete/" class="btn btn-danger badge-pill"> Delete </a>
+                </div>
+            {% endfor %}
+       
+
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        
+        <script src="" async defer></script>
+{% endblock  %}

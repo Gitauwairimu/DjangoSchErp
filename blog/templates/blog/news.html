@@ -1,0 +1,23 @@
+{% extends 'blog/nav.html' %}
+{% load static %}
+
+{% block content %}
+<h1 style='text-align: center; '> Announcements </h1>
+
+             {% for new in news %}
+                {{ new.poster }} <br>
+                {{ new.title }} <br>
+                {{ new.post }} <br>
+                <div class="float-right">
+                    <a href="/news/{{ new.id}}" class="btn btn-primary badge-pill"> Read </button>
+                    <a href="/news/{{ new.id}}/update/" class="btn btn-danger badge-pill"> Update </a>
+                </div>
+            {% endfor %}
+       
+
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        
+        <script src="" async defer></script>
+{% endblock  %}

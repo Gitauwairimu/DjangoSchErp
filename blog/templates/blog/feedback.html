@@ -1,0 +1,16 @@
+{% extends 'blog/nav.html' %}
+{% load static %}
+
+{% block content %}
+<h2> Give Feedback </h2>
+
+<form action='' method='POST' >
+{% csrf_token %}
+
+{{ form }}
+
+<button class='btn btn-primary' type='submit'> Submit </button>
+
+<form>
+
+{% endblock %}

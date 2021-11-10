@@ -1,0 +1,23 @@
+{% extends 'blog/nav.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+
+{% for message in messages %}
+ {{message}}
+{% endfor %}
+
+<h5> Fee Payment </h5>
+<form action='' method='POST'>
+{% csrf_token %}
+
+{{ form.as_p}}
+
+<button type='submit'> Pay </button>
+</form>
+        
+        <script src="" async defer></script>
+
+{% endblock %}

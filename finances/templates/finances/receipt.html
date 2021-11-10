@@ -1,0 +1,33 @@
+{% load static %}
+
+{% block content %}
+<div style='text-align: center'>
+<h3 style='font-size: 30px; color: blue;' >  {{ schools.school_name}} </h3>
+<h3>  P.O. Box {{ schools.post_box}} </h3>
+<h3>  {{ schools.town}} </h3>
+</div>
+<br>
+
+Date: {{ receipts.payment_date.day}}.{{ receipts.payment_date.month}}, {{ receipts.payment_date.year}}
+
+<br><br>
+<hr>
+<h3>  {{ receipts.student_name}} </h3>
+<h5> <span> Receipt # {{ receipts.receipt_number}} </span> <h5> <h5> Payment Status <span>{{ receipts.payment_status}} </span> <h5>
+
+<br><hr>
+
+
+
+
+<h5> Paid towards: {{ receipts.payable_towards}} <h5>
+<h5> Paid Amount: {{ receipts.amount_paid}} <h5>
+<h5> Balance: {{ receipts.personal_balance}} <h5>
+<br><br><br><br>
+<h5> Paid by: {{ receipts.paid_by}} <h5>
+<h5> Payment received by: {{ receipts.name}} <h5>
+<hr>
+
+
+
+{% endblock content %}
