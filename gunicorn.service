@@ -5,8 +5,8 @@ After=network.target
 [Service]
 User=ubuntu
 Group=nginx
-WorkingDirectory=/var/lib/jenkins/workspace/DjangoApp
-ExecStart=/var/lib/jenkins/workspace/DjangoApp/env/bin/gunicorn --workers 3 --log-level debug --error-logfile /var/lib/jenkins/workspace/DjangoApp/error.log --bind unix:/var/lib/jenkins/workspace/DjangoApp/app.sock DjangoApp.wsgi:application
+WorkingDirectory=/var/lib/jenkins/workspace/website
+ExecStart=/var/lib/jenkins/workspace/website/env/bin/gunicorn --workers 3 --log-level debug --error-logfile /var/lib/jenkins/workspace/website/error.log --bind unix:/var/lib/jenkins/workspace/website/app.sock website.wsgi:application
 
 [Install]
 WantedBy=multi-user.target
