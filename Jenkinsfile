@@ -1,16 +1,30 @@
-pipeline{
-    agent any
-    stages{
-        stage {
-            steps ('Start Process') {
-            echo 'They are gone'
-        }
-        }
-        
-        options {
-            timeout (time: 2, unit: 'MINUTES')
-        }
-    
 
+pipeline {
+    agent any
+    stages {
+         stage('Setup Python Virtual Environment'){
+            steps {
+                sh '''
+                    chmod +x envsetup.sh
+                    ./envsetup.sh
+                    '''
+            }
+        }
+        stage('Setup gunicorn service'){
+            steps {
+                sh '''
+                    chmod +x gunicorn.sh
+                    ./gunicorn.sh
+                    '''
+            }
+        }
+        stage('Setup Nginx'){
+            steps {
+                sh '''
+                    chmod +x nginx.sh
+                    ./nginx.sh
+                    '''
+            }
+        }
     }
 }
