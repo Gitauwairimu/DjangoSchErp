@@ -60,17 +60,17 @@ class Payment(models.Model):
     student_name = models.ForeignKey(Student, on_delete=models.CASCADE)
     payable_towards = models.CharField(max_length=200, choices = payable_towards, default = "tuition_fee")
     payment_date =  models.DateTimeField(default=timezone.now)
-    amount_paid = models.PositiveBigIntegerField(blank=False, null=True)
+    amount_paid = models.IntegerField(blank=False, null=True)
     payment_mode = models.CharField(max_length=200, choices = payment_mode, default = "Cash")
     # account_name = models.ForeignKey(Account, on_delete=models.CASCADE, default=70)
     receipt_number = models.IntegerField(blank=False, null=True, unique=True)
     name = models.ForeignKey(Staff, on_delete=models.CASCADE, related_name="pay_received_by",)
     # account_balance = models.PositiveBigIntegerField(default=0)
-    acc_balance = models.PositiveBigIntegerField(default=0)
+    acc_balance = models.IntegerField(default=0)
     personal_balance = models.IntegerField(default=0)
     term = models.ForeignKey(Fee, on_delete=models.CASCADE)
     payment_status = models.CharField(max_length=200, default='Underpaid')
-    total_pay = models.PositiveBigIntegerField(default=0)
+    total_pay = models.IntegerField(default=0)
     
 
 # do signal for overpayment to overflow into next term
