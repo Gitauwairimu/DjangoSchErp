@@ -14,12 +14,14 @@ bash
 git clone https://github.com/Gitauwairimu/DjangoSchErp.git
 
     Navigate into the project directory:
+    git clone https://github.com/Gitauwairimu/DjangoSchErp.git
 
 bash
 
 cd DjangoSchErp
 
     Create a virtual environment and activate it:
+    cd DjangoSchErp
 
 bash
 
