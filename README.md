@@ -1,7 +1,5 @@
 # DjangoSchErp
-The app is a django based application for the management of educational institutions.
-Its current modules include student, staff, and finance management.
-Its work in progress
+DjangoSchErp is a school management system built with Django that allows schools to manage their day-to-day operations. It provides modules for managing students, teachers, courses, grades, and exams, as well as generating reports and tracking student performance. With its user-friendly interface and customizable settings, DjangoSchErp is a powerful tool for improving school administration and academic outcomes.
 
 Getting Started
 
