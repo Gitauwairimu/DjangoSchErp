@@ -13,10 +13,9 @@ bash
 
 git clone https://github.com/Gitauwairimu/DjangoSchErp.git
 
-    Navigate into the project directory:
     git clone https://github.com/Gitauwairimu/DjangoSchErp.git
 
-bash
+Navigate into the project directory:
 
 cd DjangoSchErp
 
