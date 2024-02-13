@@ -36,17 +36,14 @@ RUN pip install --upgrade pip
 COPY ./requirements.txt /usr/src/app
 RUN pip install -r requirements.txt
 
-
-
-
-RUN python manage.py collectstatic --noinput
-
 # Install Nginx and dependencies
 RUN apk add nginx
 
 # copy project
 COPY . /usr/src/app
 COPY website/nginx.conf /etc/nginx/nginx.conf
+
+RUN python manage.py collectstatic --noinput
 
 # Expose Nginx port and NodePort
 EXPOSE 80
