@@ -18,4 +18,8 @@ COPY . /usr/src/app
 
 EXPOSE 8000
 
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+# python manage.py collectstatic
+
+# CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+# gunicorn --bind 0.0.0.0:8000 website.wsgi
+CMD ["gunicorn", "--bind", "0.0.0.0:8000", "website.wsgi:application"]
