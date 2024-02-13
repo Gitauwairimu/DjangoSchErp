@@ -10,6 +10,12 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Access secrets
+        run: |
+          DEBUG=${{ secrets.DEBUG }}
+          SECRET_KEY=${{ secrets.SECRET_KEY }}
+          # ... access other secrets
+
       - name: Build Docker image
         run: |
           docker build -t django-img .
