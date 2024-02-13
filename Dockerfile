@@ -24,8 +24,6 @@ RUN bash -c "source venv/bin/activate"
 
 RUN pip install wheel
 
-
-
 #RUN apt-get install --virtual build-deps gcc python3-dev musl-dev \
  #  && apt-get install -y postgresql \
  #  && apt-get install -y postgresql-dev \
@@ -40,9 +38,6 @@ RUN pip install --upgrade pip
 COPY ./requirements.txt /usr/src/app
 RUN pip install -r requirements.txt
 
-
-RUN python manage.py collectstatic --noinput
-
 # Install Nginx and dependencies
 RUN apt-get nginx
 
@@ -54,6 +49,7 @@ COPY website/nginx.conf /etc/nginx/nginx.conf
 EXPOSE 80
 EXPOSE 8000
 
+RUN python manage.py collectstatic --noinput
 RUN python manage.py migrate
 
 # CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
