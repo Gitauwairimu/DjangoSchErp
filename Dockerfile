@@ -19,7 +19,7 @@ RUN python3 -m venv /opt/venv
 # Activate virtual environment
 RUN source /opt/venv/bin/activate
 
-RUN tree /opt/
+RUN ls
 # RUN apk add libpq-dev gcc \
 #     && pip install psycopg2
 
