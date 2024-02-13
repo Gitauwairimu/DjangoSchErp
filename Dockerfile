@@ -24,13 +24,15 @@ RUN bash -c "source venv/bin/activate"
 
 RUN pip install wheel
 
-RUN apt-get install --virtual build-deps gcc python3-dev musl-dev \
-    && apt-get install -y postgresql \
-    && apt-get install -y postgresql-dev \
-    && pip install psycopg2 \
-    && apt-get install -y jpeg-dev zlib-dev libjpeg \
-    && pip install Pillow \
-    && apt-get autoremove --purge build-deps
+
+
+#RUN apt-get install --virtual build-deps gcc python3-dev musl-dev \
+ #  && apt-get install -y postgresql \
+ #  && apt-get install -y postgresql-dev \
+ #  && pip install psycopg2 \
+ #  && apt-get install -y jpeg-dev zlib-dev libjpeg \
+ #  && pip install Pillow \
+ #  && apt-get autoremove --purge build-deps
 
 
 # install dependencies
