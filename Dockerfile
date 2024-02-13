@@ -9,8 +9,9 @@ ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
 # Install dependencies for creating virtual environment
-RUN apt-get python3-dev py-virtualenv
+#RUN apt-get python3-dev py-virtualenv
 # RUN apk add py-virtualenv
+RUN apt-get update && apt-get install python3-dev python3-venv
 
 # Create virtual environment
 RUN python3 -m venv /opt/venv
