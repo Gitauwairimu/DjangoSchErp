@@ -14,12 +14,13 @@ ENV PYTHONUNBUFFERED 1
 RUN apt-get -y update && apt-get install -y python3-dev python3-venv
 
 # Create virtual environment
-RUN python3 -m venv /opt/venv
-
-# Activate virtual environment
-RUN source /opt/venv/bin/activate
+RUN python3 -m venv venv
 
 RUN ls
+
+# Activate virtual environment
+RUN source venv/bin/activate
+
 # RUN apk add libpq-dev gcc \
 #     && pip install psycopg2
 
