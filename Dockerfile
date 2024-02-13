@@ -11,7 +11,7 @@ ENV PYTHONUNBUFFERED 1
 # Install dependencies for creating virtual environment
 #RUN apt-get python3-dev py-virtualenv
 # RUN apk add py-virtualenv
-RUN apt-get update && apt-get install python3-dev python3-venv
+RUN apt-get -y update && apt-get install -y python3-dev python3-venv
 
 # Create virtual environment
 RUN python3 -m venv /opt/venv
@@ -24,13 +24,13 @@ RUN source /opt/venv/bin/activate
 
 RUN pip install wheel
 
-RUN apt-get --virtual build-deps gcc python3-dev musl-dev \
-    && apt-get postgresql \
-    && apt-get postgresql-dev \
+RUN apt-get install --virtual build-deps gcc python3-dev musl-dev \
+    && apt-get -y postgresql \
+    && apt-get -y postgresql-dev \
     && pip install psycopg2 \
-    && apt-get jpeg-dev zlib-dev libjpeg \
+    && apt-get install -y jpeg-dev zlib-dev libjpeg \
     && pip install Pillow \
-    && apt-get del build-deps
+    && apt-get install-y del build-deps
 
 # install dependencies
 RUN pip install --upgrade pip 
