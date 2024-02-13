@@ -24,13 +24,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 #SECRET_KEY = config('SECRET_KEY')
-SECRET_KEY = os.environ.get('SECRET_KEY')
-
+#SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = '_iHJCTKQnNEvdQvVcIvcDC-S7f2qiR_wSMBBBkcMC0A'
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
 #DEBUG = config('DEBUG', cast=bool)
-DEBUG = os.environ.get('DEBUG')
+#DEBUG = os.environ.get('DEBUG')
+DEBUG = True
 ALLOWED_HOSTS = ['www.cloud101.dev/', 'localhost']
 
 sys.modules['fontawesome_free'] = __import__('fontawesome-free')
