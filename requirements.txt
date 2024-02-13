@@ -1,6 +1,6 @@
 arabic-reshaper==2.1.3
 asgiref==3.2.10
-dataclasses==0.8
+dataclasses
 Django==2.1.15
 django-crispy-forms==1.13.0
 django-phone-field==1.8.1
@@ -10,15 +10,19 @@ gunicorn==21.2.0
 html5lib==1.1
 importlib-metadata==4.8.3
 packaging==21.3
-Pillow==8.4.0
-pkg-resources==0.0.0
-psycopg2==2.9.8
+# Pillow==8.4.0
+# Pillow
+# pkg-resources==0.0.0
+# psycopg2==3.1.18 
+# psycopg-binary==3.1.18
 pyparsing==3.1.1
 pypdf2==3.0.1
 python-decouple==3.8
 pytz==2020.1
-reportlab==3.6.8
+# reportlab==3.6.8
+# reportlab
 six==1.16.0
 typing-extensions==4.1.1
 webencodings==0.5.1
 zipp==3.6.0
+
