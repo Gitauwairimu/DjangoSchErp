@@ -1,0 +1,16 @@
+name: Django Build and Push Image
+
+on:
+  push:
+    branches: [ dev ] # Trigger on pushes to master branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Build Docker image
+        run: |
+          docker build -t django-img .
+
