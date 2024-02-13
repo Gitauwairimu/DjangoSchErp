@@ -21,6 +21,7 @@ RUN source /opt/venv/bin/activate
 # RUN apk add libpq-dev gcc \
 #     && pip install psycopg2
 
+RUN apk add python3-cgi
 RUN pip install wheel
 
 RUN apk add --virtual build-deps gcc python3-dev musl-dev \
