@@ -39,7 +39,7 @@ COPY ./requirements.txt /usr/src/app
 RUN pip install -r requirements.txt
 
 # Install Nginx and dependencies
-RUN apt-get nginx
+RUN apt-get install nginx
 
 # copy project
 COPY . /usr/src/app
