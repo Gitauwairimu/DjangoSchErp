@@ -16,11 +16,9 @@ RUN apt-get -y update && apt-get install -y python3-dev python3-venv
 # Create virtual environment
 RUN python3 -m venv venv
 
-RUN ls venv/bin/
-
 # Activate virtual environment
-RUN source venv/bin/activate
-
+#RUN source venv/bin/activate
+RUN bash -c "source venv/bin/activate"
 # RUN apk add libpq-dev gcc \
 #     && pip install psycopg2
 
