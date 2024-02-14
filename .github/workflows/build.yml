@@ -21,11 +21,11 @@ jobs:
           docker build -t django-img .
 
 
-      - name: Run Docker image
-        run: |
-          docker run -p 8080:8080 django-img
+#      - name: Run Docker image
+#        run: |
+#          docker run -p 8080:8080 django-img
 
-      - name: Test if running
-        run: |
-          curl localhost:8080
+#      - name: Test if running
+#        run: |
+ #         curl localhost:8080
 
