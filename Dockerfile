@@ -54,7 +54,7 @@ EXPOSE 8000
 
 COPY run_migrations.sh /usr/src/app/run_migrations.sh
 RUN chmod +x /usr/src/app/run_migrations.sh
-RUN bash "/usr/src/app/run_migrations.sh"
+RUN /usr/src/app/run_migrations.sh
 
 
 # CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
