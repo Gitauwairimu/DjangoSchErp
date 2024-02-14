@@ -23,7 +23,7 @@ jobs:
 
       - name: Run Docker image
         run: |
-          docker run -it -p 8080:8080 django-img
+          docker run -p 8080:8080 django-img
 
       - name: Test if running
         run: |
