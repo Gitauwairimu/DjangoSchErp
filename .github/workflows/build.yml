@@ -20,3 +20,7 @@ jobs:
         run: |
           docker build -t django-img .
 
+
+      - name: Run Docker image
+        run: |
+          docker run -it -p 8080:8080 django-img
