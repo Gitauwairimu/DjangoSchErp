@@ -59,12 +59,12 @@ RUN chmod +x /usr/src/app/run_migrations.sh
 
 # CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
 # gunicorn --bind 0.0.0.0:8000 website.wsgi
-# CMD ["gunicorn", "--bind", "0.0.0.0:8000", "website.wsgi:application"]
+CMD ["gunicorn", "--bind", "0.0.0.0:8000", "website.wsgi:application"]
 
 # Start Nginx and Gunicorn
-o
-CMD ["nginx", "-g", "daemon off;"] & \
-    gunicorn --bind 0.0.0.0:8000 website.wsgi:application
+
+#CMD ["nginx", "-g", "daemon off;"] & \
+ #   gunicorn --bind 0.0.0.0:8000 website.wsgi:application
 
 #ENTRYPOINT ["/app/run_migrations.sh", "&&", "gunicorn", "--bind", "0.0.0.0:8000", "website.wsgi:application"]
 
