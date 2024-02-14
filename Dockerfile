@@ -62,6 +62,8 @@ RUN /usr/src/app/run_migrations.sh
 # CMD ["gunicorn", "--bind", "0.0.0.0:8000", "website.wsgi:application"]
 
 # Start Nginx and Gunicorn
-CMD ["nginx", "-g", "daemon off;"] & \
-    gunicorn --bind 0.0.0.0:8000 website.wsgi:application
+#CMD ["nginx", "-g", "daemon off;"] & \
+ #   gunicorn --bind 0.0.0.0:8000 website.wsgi:application
+
+ENTRYPOINT ["/app/run_migrations.sh", "&&", "gunicorn", "--bind", "0.0.0.0:8000", "website.wsgi:application"]
 
