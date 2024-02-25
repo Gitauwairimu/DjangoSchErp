@@ -46,7 +46,7 @@ COPY . /usr/src/app
 COPY website/nginx.conf /etc/nginx/nginx.conf
 
 # Expose Nginx port and NodePort
-EXPOSE 80
+#EXPOSE 80
 EXPOSE 8000
 
 #RUN python manage.py collectstatic --noinput
@@ -54,7 +54,7 @@ EXPOSE 8000
 
 COPY run_migrations.sh /usr/src/app/run_migrations.sh
 RUN chmod +x /usr/src/app/run_migrations.sh
-#RUN /usr/src/app/run_migrations.sh
+RUN /usr/src/app/run_migrations.sh
 
 
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
