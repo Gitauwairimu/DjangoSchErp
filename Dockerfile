@@ -52,8 +52,8 @@ EXPOSE 8000
 RUN python manage.py collectstatic -v 2 --noinput
 
 #RUN python manage.py collectstatic
-#RUN python3 manage.py migrate
-#RUN python3 manage.py makemigrations
+RUN python manage.py migrate
+RUN python manage.py makemigrations
 
 #COPY run_migrations.sh /usr/src/app/run_migrations.sh
 #RUN chmod +x /usr/src/app/run_migrations.sh
