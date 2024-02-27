@@ -49,7 +49,7 @@ COPY website/nginx.conf /etc/nginx/nginx.conf
 #EXPOSE 80
 EXPOSE 8000
 
-RUN bash -c 'python manage.py collectstatic --noinput'
+RUN python manage.py collectstatic
 #RUN python3 manage.py migrate
 #RUN python3 manage.py makemigrations
 
