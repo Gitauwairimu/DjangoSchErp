@@ -58,9 +58,9 @@ EXPOSE 8000
 #RUN /usr/src/app/run_migrations.sh
 
 
-#CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
 # gunicorn --bind 0.0.0.0:8000 website.wsgi
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "website.wsgi:application"]
+#CMD ["gunicorn", "--bind", "0.0.0.0:8000", "website.wsgi:application"]
 
 # Start Nginx and Gunicorn
 
