@@ -51,6 +51,7 @@ EXPOSE 8000
 
 RUN python manage.py collectstatic -v 2 --noinput
 
+RUN tree
 #RUN python manage.py collectstatic
 RUN python manage.py makemigrations
 RUN python manage.py migrate
