@@ -40,7 +40,7 @@ RUN pip install -r requirements.txt
 
 # Install Nginx and dependencies
 RUN apt-get install -y nginx
-RUN apt-get install -y tree
+RUN ls
 # copy project
 COPY . /usr/src/app
 COPY website/nginx.conf /etc/nginx/nginx.conf
