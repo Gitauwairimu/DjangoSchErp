@@ -40,7 +40,6 @@ RUN pip install -r requirements.txt
 
 # Install Nginx and dependencies
 RUN apt-get install -y nginx
-RUN ls
 # copy project
 COPY . /usr/src/app
 COPY website/nginx.conf /etc/nginx/nginx.conf
@@ -51,7 +50,7 @@ EXPOSE 8000
 
 RUN python manage.py collectstatic -v 2 --noinput
 
-RUN tree
+RUN ls
 #RUN python manage.py collectstatic
 RUN python manage.py makemigrations
 RUN python manage.py migrate
