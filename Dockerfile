@@ -49,9 +49,10 @@ COPY /usr/src/app/website/nginx.conf /etc/nginx/nginx.conf
 #EXPOSE 80
 EXPOSE 8000
 
-#RUN curl localhost
+RUN cat /etc/nginx/nginx.conf 
 
 RUN python manage.py collectstatic -v 2 --noinput
+RUN ls /usr/src/app/statifiles
 
 #RUN python manage.py collectstatic
 RUN python manage.py makemigrations
