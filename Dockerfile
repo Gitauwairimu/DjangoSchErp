@@ -46,10 +46,10 @@ COPY website/nginx.conf /etc/nginx/nginx.conf
 
 
 # Expose Nginx port and NodePort
-EXPOSE 80
+#EXPOSE 80
 EXPOSE 8000
 
-RUN curl localhost
+#RUN curl localhost
 
 RUN python manage.py collectstatic -v 2 --noinput
 
