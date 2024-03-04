@@ -45,6 +45,7 @@ COPY . /usr/src/app
 COPY website/nginx.conf /etc/nginx/nginx.conf
 
 RUN nginx -t
+RUN nginx -s reload
 # Expose Nginx port and NodePort
 #EXPOSE 80
 EXPOSE 8000
