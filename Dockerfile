@@ -11,7 +11,7 @@ ENV PYTHONUNBUFFERED 1
 # Install dependencies for creating virtual environment
 #RUN apt-get python3-dev py-virtualenv
 # RUN apk add py-virtualenv
-RUN apt-get -y update && apt-get install -y python3-dev python3-venv netcat
+RUN apt-get -y update && apt-get install -y python3-dev python3-venv
 
 # Create virtual environment
 RUN python3 -m venv venv
@@ -58,10 +58,7 @@ CMD ["nginx", "-g", "daemon off;"]
 #EXPOSE 80
 EXPOSE 8000
 
-RUN cat /etc/nginx/nginx.conf 
-
 RUN python manage.py collectstatic -v 2 --noinput
-RUN ls /usr/src/app/staticfiles
 
 #RUN python manage.py collectstatic
 RUN python manage.py makemigrations
