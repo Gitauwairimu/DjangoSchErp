@@ -42,7 +42,7 @@ RUN pip install -r requirements.txt
 RUN apt-get install -y nginx
 # copy project
 COPY . /usr/src/app
-COPY website/nginx.conf /etc/nginx/nginx.conf
+COPY /usr/src/app/website/nginx.conf /etc/nginx/nginx.conf
 
 
 # Expose Nginx port and NodePort
@@ -53,8 +53,6 @@ EXPOSE 8000
 
 RUN python manage.py collectstatic -v 2 --noinput
 
-RUN pwd
-RUN ls staticfiles
 #RUN python manage.py collectstatic
 RUN python manage.py makemigrations
 RUN python manage.py migrate
