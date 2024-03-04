@@ -52,7 +52,7 @@ EXPOSE 8000
 RUN cat /etc/nginx/nginx.conf 
 
 RUN python manage.py collectstatic -v 2 --noinput
-RUN ls /usr/src/app/statifiles
+RUN ls statifiles
 
 #RUN python manage.py collectstatic
 RUN python manage.py makemigrations
