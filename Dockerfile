@@ -44,12 +44,16 @@ RUN apt-get install -y nginx
 COPY . /usr/src/app
 COPY website/nginx.conf /etc/nginx/nginx.conf
 
+
 # Expose Nginx port and NodePort
-#EXPOSE 80
+EXPOSE 80
 EXPOSE 8000
+
+RUN curl localhost
 
 RUN python manage.py collectstatic -v 2 --noinput
 
+RUN ls staticfiles
 #RUN python manage.py collectstatic
 RUN python manage.py makemigrations
 RUN python manage.py migrate
