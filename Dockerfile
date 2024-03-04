@@ -53,7 +53,7 @@ EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
 
 # Check if port 80 is listening
-RUN nc -z localhost 80
+#RUN nc -z localhost 80
 # Expose Nginx port and NodePort
 #EXPOSE 80
 EXPOSE 8000
