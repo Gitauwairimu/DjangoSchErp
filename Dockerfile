@@ -44,8 +44,11 @@ RUN apt-get install -y nginx
 COPY . /usr/src/app
 COPY website/nginx.conf /etc/nginx/nginx.conf
 
-RUN nginx -t
-RUN nginx -s reload
+# Install necessary tools (e.g., netcat)
+RUN apt-get netcat-busybox
+
+# Check if port 80 is listening
+RUN nc -z localhost 80
 # Expose Nginx port and NodePort
 #EXPOSE 80
 EXPOSE 8000
