@@ -48,12 +48,8 @@ COPY website/nginx.conf /etc/nginx/nginx.conf
 #EXPOSE 80
 EXPOSE 8000
 
-RUN mkdir -p /usr/src/app/staticfiles
-
 RUN python manage.py collectstatic -v 2 --noinput
 
-RUN ls
-RUN pwd
 #RUN python manage.py collectstatic
 RUN python manage.py makemigrations
 RUN python manage.py migrate
