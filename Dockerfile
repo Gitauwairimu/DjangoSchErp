@@ -11,7 +11,7 @@ ENV PYTHONUNBUFFERED 1
 # Install dependencies for creating virtual environment
 #RUN apt-get python3-dev py-virtualenv
 # RUN apk add py-virtualenv
-RUN apt-get -y update && apt-get install -y python3-dev python3-venv
+RUN apt-get -y update && apt-get install -y python3-dev python3-venv netcat
 
 # Create virtual environment
 RUN python3 -m venv venv
@@ -45,7 +45,7 @@ COPY . /usr/src/app
 COPY website/nginx.conf /etc/nginx/nginx.conf
 
 # Install necessary tools (e.g., netcat)
-RUN apt-get netcat-busybox
+#RUN apt-get netcat-busybox
 
 # Check if port 80 is listening
 RUN nc -z localhost 80
