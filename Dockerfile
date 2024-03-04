@@ -53,6 +53,7 @@ EXPOSE 8000
 
 RUN python manage.py collectstatic -v 2 --noinput
 
+RUN pwd
 RUN ls staticfiles
 #RUN python manage.py collectstatic
 RUN python manage.py makemigrations
