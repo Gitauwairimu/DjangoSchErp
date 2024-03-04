@@ -44,7 +44,7 @@ RUN apt-get install -y nginx
 COPY . /usr/src/app
 COPY website/nginx.conf /etc/nginx/nginx.conf
 
-
+RUN nginx -t
 # Expose Nginx port and NodePort
 #EXPOSE 80
 EXPOSE 8000
