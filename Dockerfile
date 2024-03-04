@@ -42,7 +42,7 @@ RUN pip install -r requirements.txt
 RUN apt-get install -y nginx
 # copy project
 COPY . /usr/src/app
-COPY /usr/src/app/website/nginx.conf /etc/nginx/nginx.conf
+COPY website/nginx.conf /etc/nginx/nginx.conf
 
 
 # Expose Nginx port and NodePort
