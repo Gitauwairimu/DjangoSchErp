@@ -47,6 +47,11 @@ COPY website/nginx.conf /etc/nginx/nginx.conf
 # Install necessary tools (e.g., netcat)
 #RUN apt-get netcat-busybox
 
+EXPOSE 80
+
+# Run Nginx in the foreground
+CMD ["nginx", "-g", "daemon off;"]
+
 # Check if port 80 is listening
 RUN nc -z localhost 80
 # Expose Nginx port and NodePort
