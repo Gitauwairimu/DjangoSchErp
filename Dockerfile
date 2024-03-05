@@ -52,6 +52,7 @@ EXPOSE 80
 # Run Nginx in the foreground
 CMD ["nginx", "-g", "daemon off;"]
 
+RUN nginx -t
 # Check if port 80 is listening
 #RUN nc -z localhost 80
 # Expose Nginx port and NodePort
@@ -60,6 +61,7 @@ EXPOSE 8000
 
 RUN python manage.py collectstatic -v 2 --noinput
 
+RUN ls
 #RUN python manage.py collectstatic
 RUN python manage.py makemigrations
 RUN python manage.py migrate
