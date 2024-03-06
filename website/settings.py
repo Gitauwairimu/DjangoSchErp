@@ -152,9 +152,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-USE_S3 = os.getenv('USE_S3') == 'TRUE'
+#USE_S3 = os.getenv('USE_S3') == 'TRUE'
 
-if USE_S3:
+#if USE_S3:
     # aws settings
     AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
     AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
@@ -166,11 +166,11 @@ if USE_S3:
     AWS_LOCATION = 'static'
     STATIC_URL = 'http://cloud101.dev/static/'
     STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-else:
+#else:
 
-  STATIC_URL = 'static/'
-  STATICFILES_DIRS = [BASE_DIR / 'static']
-  STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+ # STATIC_URL = 'static/'
+  #STATICFILES_DIRS = [BASE_DIR / 'static']
+  #STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
   MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
   MEDIA_URL = '/media/'
 
