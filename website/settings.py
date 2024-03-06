@@ -32,8 +32,8 @@ SECRET_KEY = '_iHJCTKQnNEvdQvVcIvcDC-S7f2qiR_wSMBBBkcMC0A'
 #DEBUG = config('DEBUG', cast=bool)
 #DEBUG = os.environ.get('DEBUG')
 DEBUG = True
-ALLOWED_HOSTS = ['18.206.209.110', 'cloud101.dev', 'localhost']
-
+#ALLOWED_HOSTS = ['18.206.209.110', 'cloud101.dev', 'localhost']
+ALLOWED_HOSTS = ['*']
 sys.modules['fontawesome_free'] = __import__('fontawesome-free')
 
 # Application definition
@@ -153,7 +153,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles/static/')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
