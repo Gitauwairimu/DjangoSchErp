@@ -2,7 +2,7 @@ name: Django Build and Push Image
 
 on:
   push:
-    branches: [ dev ] # Trigger on pushes to master branch
+    branches: [ s3 ] # Trigger on pushes to master branch
 
 jobs:
   build:
