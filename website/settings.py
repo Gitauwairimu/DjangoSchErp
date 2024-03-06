@@ -32,7 +32,7 @@ SECRET_KEY = '_iHJCTKQnNEvdQvVcIvcDC-S7f2qiR_wSMBBBkcMC0A'
 #DEBUG = config('DEBUG', cast=bool)
 #DEBUG = os.environ.get('DEBUG')
 DEBUG = False
-ALLOWED_HOSTS = ['23.21.33.124', 'cloud101.dev', 'localhost']
+ALLOWED_HOSTS = ['54.152.88.137', 'cloud101.dev', 'localhost']
 
 sys.modules['fontawesome_free'] = __import__('fontawesome-free')
 
