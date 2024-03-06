@@ -31,7 +31,7 @@ SECRET_KEY = '_iHJCTKQnNEvdQvVcIvcDC-S7f2qiR_wSMBBBkcMC0A'
 # SECURITY WARNING: don't run with debug turned on in production!
 #DEBUG = config('DEBUG', cast=bool)
 #DEBUG = os.environ.get('DEBUG')
-DEBUG = False
+DEBUG = True
 ALLOWED_HOSTS = ['18.206.209.110', 'cloud101.dev', 'localhost']
 
 sys.modules['fontawesome_free'] = __import__('fontawesome-free')
