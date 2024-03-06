@@ -166,7 +166,7 @@ if USE_S3:
     AWS_LOCATION = 'static'
     STATIC_URL = 'http://cloud101.dev/static/'
     STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-else:1~
+else:
 
   STATIC_URL = 'static/'
   STATICFILES_DIRS = [BASE_DIR / 'static']
