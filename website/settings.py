@@ -168,8 +168,8 @@ USE_TZ = True
 #    STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 
-AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
+AWS_ACCESS_KEY_ID = $(AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = $(AWS_SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = 'serve-djangoerp'
 AWS_DEFAULT_ACL = 'public-read'
 AWS_S3_CUSTOM_DOMAIN = 'serve-djangoerp.s3.amazonaws.com'
