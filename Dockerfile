@@ -59,6 +59,9 @@ RUN nginx -t
 #EXPOSE 80
 EXPOSE 8000
 
+RUN print(os.environ)
+
+
 RUN python manage.py collectstatic -v 2 --noinput
 
 RUN ls staticfiles
