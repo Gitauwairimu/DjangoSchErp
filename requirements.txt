@@ -29,3 +29,4 @@ zipp==3.6.0
 
 django-storages
 boto3
+python-dotenv
