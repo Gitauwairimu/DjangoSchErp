@@ -15,12 +15,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-region: us-east-1
-
       - name: Access secrets
         run: |
           DEBUG=${{ secrets.DEBUG }}
