@@ -23,6 +23,10 @@ jobs:
           AWS_STORAGE_BUCKET_NAME=${{ secrets.AWS_STORAGE_BUCKET_NAME }}
           # ... access other secrets
 
+      - name: Collectstatic
+        run: |
+          python manage.py collectstatic
+
       - name: Build Docker image
         run: |
           docker build -t django-img .
