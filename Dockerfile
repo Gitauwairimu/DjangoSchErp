@@ -59,6 +59,11 @@ RUN nginx -t
 #EXPOSE 80
 EXPOSE 8000
 
+ENV AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
+ENV AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+
+
+
 RUN python manage.py collectstatic -v 2 --noinput
 
 RUN ls staticfiles
