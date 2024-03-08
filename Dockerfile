@@ -59,14 +59,14 @@ RUN nginx -t
 #EXPOSE 80
 EXPOSE 8000
 
-ENV AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
-ENV AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+#ENV AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
+#ENV AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
 
 
 
-RUN python manage.py collectstatic -v 2 --noinput
+#RUN python manage.py collectstatic -v 2 --noinput
 
-RUN ls staticfiles
+#RUN ls staticfiles
 #RUN python manage.py collectstatic
 RUN python manage.py makemigrations
 RUN python manage.py migrate
@@ -81,7 +81,6 @@ RUN python manage.py migrate
 CMD ["gunicorn", "--bind", "0.0.0.0:8000", "website.wsgi:application"]
 
 # Start Nginx and Gunicorn
-
 #CMD ["nginx", "-g", "daemon off;"] & \
  #   gunicorn --bind 0.0.0.0:8000 website.wsgi:application
 
