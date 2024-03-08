@@ -48,10 +48,11 @@ INSTALLED_APPS = [
     'phone_field',
     'finances.apps.FinancesConfig',
     'crispy_forms',
-    'fontawesome_free',
     'storages',
     
 ]
+
+#'fontawesome_free',
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
