@@ -179,7 +179,7 @@ AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
 AWS_LOCATION = 'static'
 STATIC_URL = 'http://cloud101.dev/static/'
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-
+STATICFILES_DIRS = [BASE_DIR / 'static']
 #else:
 
  # STATIC_URL = 'static/'
