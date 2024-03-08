@@ -34,7 +34,7 @@ SECRET_KEY = '_iHJCTKQnNEvdQvVcIvcDC-S7f2qiR_wSMBBBkcMC0A'
 DEBUG = True
 #ALLOWED_HOSTS = ['18.206.209.110', 'cloud101.dev', 'localhost']
 ALLOWED_HOSTS = ['*']
-sys.modules['fontawesome_free'] = __import__('fontawesome-free')
+#sys.modules['fontawesome_free'] = __import__('fontawesome-free')
 
 # Application definition
 INSTALLED_APPS = [
@@ -193,4 +193,4 @@ MEDIA_URL = '/media/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-#CRISPY_TEMPLATE_PACK = 'bootstrap4'
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
