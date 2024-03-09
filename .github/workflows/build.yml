@@ -56,8 +56,9 @@ jobs:
       - name: Add SSH key (Optional: Adjust based on your needs)
         run: |
           echo "${{ secrets.PEM_KEY }}" >> termapp.pem
-          ls
           chmod 600 termapp.pem  # Set appropriate permissions
+          ls
+          pwd
 
       - name: Docker images ls
         run: |
