@@ -57,8 +57,7 @@ jobs:
         run: |
           echo "${{ secrets.PEM_KEY }}" >> termapp.pem
           chmod 600 termapp.pem  # Set appropriate permissions
-          ls
-          pwd
+          cat termapp.pem          
 
       - name: Docker images ls
         run: |
