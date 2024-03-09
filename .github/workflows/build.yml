@@ -57,6 +57,8 @@ jobs:
         run: |
           echo "${{ secrets.PEM_KEY }}" >> termapp.pem
           chmod 600 termapp.pem  # Set appropriate permissions          
+          pwd
+          ls
 
       - name: Install Ansible (adjust based on your OS)
         run: |
