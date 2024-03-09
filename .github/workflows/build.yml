@@ -67,6 +67,6 @@ jobs:
 
       - name: Execute Ansible Playbook
         run: |
-          ansible-playbook -i deployment/ansible/inventory deployment/ansible/deployPlaybook.yml
+          ansible-playbook -i /home/runner/work/DjangoSchErp/DjangoSchErp/deployment/ansible/inventory deployment/ansible/deployPlaybook.yml
 
 
