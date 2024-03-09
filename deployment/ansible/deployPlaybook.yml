@@ -1,0 +1,21 @@
+---
+- hosts: djangoserver
+  tasks:
+    - name: Create erpnetwork (if it doesn't exist)
+      docker_network:
+        name: erpnetwork
+        state: present
+      become: yes
+
+    - name: Run djangoscherp-dev container
+      docker_container:
+        name: django-erp
+        image: gitauwairimu/djangoscherp-dev:latest
+        ports:
+          - container_port: 8000
+            host_port: 80
+        volumes:
+          - "{{ lookup('env', 'DJANGO_DATA_DIR') }}:/app/data"
+        networks:
+          - name: erpnetwork
+        state: started
