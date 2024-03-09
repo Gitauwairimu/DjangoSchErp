@@ -7,6 +7,21 @@
         state: present
       become: yes
 
+    - name: Stop and remove containers with image prefix 'gitauwairimu/djangoscherp-dev'
+      docker_container:
+        state: absent
+        force: yes  # Forcefully stop container before removal (optional)
+      filters:
+        image: "{{ 'gitauwairimu/djangoscherp-dev:*' }}"  # Filter by image name prefix
+
+    - name: Remove images starting with 'gitauwairimu/djangoscherp-dev'
+      docker_image:
+        name: "{{ image.name }}"
+        state: absent
+      loop: "{{ docker_images.results }}"
+      when: image.name.startswith("gitauwairimu/djangoscherp-dev")
+
+
     - name: Run djangoscherp-dev container
       docker_container:
         name: django-erp
