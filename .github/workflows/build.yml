@@ -67,6 +67,6 @@ jobs:
 
       - name: Execute Ansible Playbook
         run: |
-          ansible-playbook deployment/ansible/deployPlaybook.yml
+          ansible-playbook -i inventory deployment/ansible/deployPlaybook.yml
 
 
