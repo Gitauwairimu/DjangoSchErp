@@ -56,11 +56,15 @@ jobs:
       - name: Add SSH key
         run: |
           echo "${{ secrets.PEM_KEY }}" >> termapp.pem
-          chmod 600 termapp.pem  # Set appropriate permissions
-          cat termapp.pem          
+          chmod 600 termapp.pem  # Set appropriate permissions          
 
-      - name: Docker images ls
+      - name: Install Ansible (adjust based on your OS)
         run: |
-          docker images
+          apt install ansible -y  # Install Ansible (replace with yum or dnf for other distributions)
+
+
+      - name: Execute Ansible Playbook
+        run: |
+          ansible-playbook deployment/ansible/deployPlaybook.yml
 
 
