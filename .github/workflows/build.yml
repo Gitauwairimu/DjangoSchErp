@@ -60,7 +60,7 @@ jobs:
 
       - name: Install Ansible (adjust based on your OS)
         run: |
-          apt install ansible -y  # Install Ansible (replace with yum or dnf for other distributions)
+          sudo apt install ansible -y  # Install Ansible (replace with yum or dnf for other distributions)
 
 
       - name: Execute Ansible Playbook
