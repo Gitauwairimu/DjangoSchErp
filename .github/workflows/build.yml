@@ -41,7 +41,7 @@ jobs:
 
       - name: Push Docker image
         run: |
-          docker push gitauwairimu/djangoscherp-dev:latest
+          docker push gitauwairimu/djangoscherp-dev:$GITHUB_RUN_ID
 
 #      - name: Test if running
 #        run: |
