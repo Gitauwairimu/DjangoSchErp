@@ -53,7 +53,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Add SSH key (Optional: Adjust based on your needs)
+      - name: Add SSH key
         run: |
           echo "${{ secrets.PEM_KEY }}" >> termapp.pem
           chmod 600 termapp.pem  # Set appropriate permissions
