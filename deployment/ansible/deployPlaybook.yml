@@ -9,10 +9,10 @@
         update_cache: yes
         cache_valid_time: 3600  # Optional: Cache updates for 1 hour
 
-    - name: Upgrade all packages
-      apt:  # Replace with yum or dnf for other distributions
-        upgrade: yes
-        force_apt_lock: yes  # Optional: Avoid dependency conflicts
+    # - name: Upgrade all packages
+    #   apt:  # Replace with yum or dnf for other distributions
+    #     upgrade: yes
+    #     force_apt_lock: yes  # Optional: Avoid dependency conflicts
 
     # - name: Ensure Docker is installed
     #   apt:  # Replace with yum or dnf for other distributions
