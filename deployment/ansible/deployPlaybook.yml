@@ -24,12 +24,12 @@
         name: erpnetwork
         state: present
 
-    - name: Stop and remove djangoscherp-dev containers
-      docker_container:
-        state: absent
-        force: yes  # Forcefully stop container before removal (optional)
-        filters:
-          image: "{{ 'gitauwairimu/djangoscherp-dev:*' }}"
+    # - name: Stop and remove djangoscherp-dev containers
+    #   docker_container:
+    #     state: absent
+    #     force: yes  # Forcefully stop container before removal (optional)
+    #     filters:
+    #       image: "{{ 'gitauwairimu/djangoscherp-dev:*' }}"
 
     - name: Remove images starting with 'gitauwairimu/djangoscherp-dev'
       docker_image:
