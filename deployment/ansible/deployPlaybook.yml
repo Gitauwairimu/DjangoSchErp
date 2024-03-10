@@ -92,13 +92,13 @@
         # image_tag: "gitauwairimu/djangoscherp-dev:{{ github.run_id }}"  # Build tag using Jinja2
         image_tag: "gitauwairimu/djangoscherp-dev:{{ lookup('env', 'GITHUB_RUN_ID') }}"  # Access CI_RUN_ID environment variable
 
-    - name: Build dynamic image tag
-      set_fact:
-        image_tag: "gitauwairimu/djangoscherp-dev:{{ github.run_id }}"  # Build tag using Jinja2
-      vars:
-        github.run_id:  '$GITHUB_RUN_ID' # Assuming 'github' is defined elsewhere in your playbook/role
-          # run_id : "your_workflow_run_id"  # Replace with the actual value
-    # ... other tasks
+    # - name: Build dynamic image tag
+    #   set_fact:
+    #     image_tag: "gitauwairimu/djangoscherp-dev:{{ github.run_id }}"  # Build tag using Jinja2
+    #   vars:
+    #     github.run_id:  '$GITHUB_RUN_ID' # Assuming 'github' is defined elsewhere in your playbook/role
+    #       # run_id : "your_workflow_run_id"  # Replace with the actual value
+    # # ... other tasks
 
 
     - name: Ensure container is running
