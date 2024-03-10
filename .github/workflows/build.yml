@@ -71,7 +71,7 @@ jobs:
         shell: bash
         run: |
           sudo mkdir -p /etc/ansible
-          cp /home/runner/work/DjangoSchErp/DjangoSchErp/deployment/ansible/ansible.cfg /etc/ansible/ansible.cfg
+          sudo cp /home/runner/work/DjangoSchErp/DjangoSchErp/deployment/ansible/ansible.cfg /etc/ansible/ansible.cfg
           cp /home/runner/work/DjangoSchErp/DjangoSchErp/deployment/ansible/inventory ansible_inventory
 
       - name: Run Ansible playbook
