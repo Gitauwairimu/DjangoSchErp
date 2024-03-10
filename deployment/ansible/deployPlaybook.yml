@@ -26,49 +26,44 @@
     #     data: "{{ docker_gpg_key.stdout }}"
     #     state: present
 
-    - name: Docker key download and add
-      command: |
-        - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
-       # - echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-
-    - name: Add Docker repository
-      apt_repository:
-        repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
+- name: Add Docker GPG apt Key
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
         state: present
 
-    - name: Update apt cache
+    - name: Add Docker Repository
+      apt_repository:
+        repo: deb https://download.docker.com/linux/ubuntu focal stable
+        state: present
+
+    - name: Update apt and install docker-ce
       apt:
-        update_cache: yes
-        cache_valid_time: 3600  # Optional: Cache updates for 1 hour
+        name: docker-ce
+        state: latest
+        update_cache: true
 
-    # - name: Upgrade all packages
-    #   apt:  # Replace with yum or dnf for other distributions
-    #     upgrade: yes
-    #     force_apt_lock: yes  # Optional: Avoid dependency conflicts
+    - name: Install Docker Module for Python
+      pip:
+        name: docker
 
-    # - name: Ensure Docker is installed
-    #   apt:  # Replace with yum or dnf for other distributions
-    #     name: docker.io
+
+    # - name: Install curl package (if missing)
+    #   apt:
+    #     name: curl
     #     state: present
 
+    # - name: Import Docker GPG key
+    #   command: curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
 
-    - name: Install curl package (if missing)
-      apt:
-        name: curl
-        state: present
+    # - name: Add Docker repository
+    #   apt_repository:
+    #     repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
+    #     state: present
 
-    - name: Import Docker GPG key
-      command: curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
-
-    - name: Add Docker repository
-      apt_repository:
-        repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
-        state: present
-
-    - name: Update apt cache
-      apt:
-        update_cache: yes
-        cache_valid_time: 3600  # Optional: Cache updates for 1 hour
+    # - name: Update apt cache
+    #   apt:
+    #     update_cache: yes
+    #     cache_valid_time: 3600  # Optional: Cache updates for 1 hour
 
 
     - name: Create erpnetwork (if it doesn't exist)
