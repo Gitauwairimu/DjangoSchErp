@@ -23,7 +23,7 @@
 
     - name: Import Docker GPG key
       apt_key:
-        key: "{{ docker_gpg_key.stdout }}"
+        data: "{{ docker_gpg_key.stdout }}"
         state: present
 
 
