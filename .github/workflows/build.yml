@@ -57,7 +57,7 @@ jobs:
         run: |
           echo "${{ secrets.PEM_KEY }}" >> termapp.pem
           chmod 600 termapp.pem  # Set appropriate permissions          
-          pwd
+          pwd termapp.pem
           ls
 
       - name: Install Ansible (adjust based on your OS)
@@ -67,7 +67,7 @@ jobs:
 
       - name: Execute Ansible Playbook
         run: |
-          ssh-copy-id -i /home/runner/work/DjangoSchErp/DjangoSchErp/termapp.pem ubuntu@18.208.157.80
+          ssh-copy-id -i ./termapp.pem ubuntu@18.208.157.80
           ansible-playbook -i /home/runner/work/DjangoSchErp/DjangoSchErp/deployment/ansible/inventory deployment/ansible/deployPlaybook.yml
 
 
