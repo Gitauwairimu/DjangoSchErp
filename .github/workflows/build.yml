@@ -77,7 +77,7 @@ jobs:
         uses: saubermacherag/ansible-playbook-docker-action@v1.4
         with:
           playbookName: '/home/runner/work/DjangoSchErp/DjangoSchErp/deployment/ansible/deployPlaybook.yml'
-          inventoryFile: '/home/runner/work/DjangoSchErp/DjangoSchErp/deployment/ansible/inventory'
+          inventoryFile: 'ansible_inventory'
           keyFile: "/home/runner/work/DjangoSchErp/DjangoSchErp/termapp.pem"
           verbosity: "vv"
 
