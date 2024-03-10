@@ -13,8 +13,19 @@
         name: curl
         state: present
 
+    # - name: Import Docker GPG key
+    #   command: curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
+
+
+    - name: Download Docker GPG key
+      command: curl -fsSL https://download.docker.com/linux/ubuntu/gpg
+      register: docker_gpg_key
+
     - name: Import Docker GPG key
-      command: curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
+      apt_key:
+        key: "{{ docker_gpg_key.stdout }}"
+        state: present
+
 
     - name: Add Docker repository
       apt_repository:
