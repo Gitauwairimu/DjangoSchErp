@@ -55,8 +55,8 @@ jobs:
 
       - name: Add SSH key
         run: |
-          echo "${{ secrets.PEM_KEY }}" >> termapp.pem
-          chmod 600 termapp.pem  # Set appropriate permissions          
+          echo "${{ secrets.PEM_KEY }}" >> /home/runner/work/DjangoSchErp/DjangoSchErp/termapp.pem
+          chmod 600 /home/runner/work/DjangoSchErp/DjangoSchErp/termapp.pem  # Set appropriate permissions          
 
       - name: Install Ansible
         run: |
