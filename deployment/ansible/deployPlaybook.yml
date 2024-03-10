@@ -87,14 +87,15 @@
     #     ports:
     #       - "80:8000"
 
-    - name: Build dynamic image tag
-      set_fact:
-        image_tag: "gitauwairimu/djangoscherp-dev:{{ github.run_id }}"  # Build tag using Jinja2
+    # - name: Build dynamic image tag
+    #   set_fact:
+    #     image_tag: "gitauwairimu/djangoscherp-dev:{{ github.run_id }}"  # Build tag using Jinja2
 
     - name: Ensure container is running
       docker_container:
         name: django-erp
-        image: "{{ image_tag }}"  # Use the constructed image_tag variable
+        # image: "{{ image_tag }}"  # Use the constructed image_tag variable
+        image: gitauwairimu/djangoscherp-dev:$GITHUB_RUN_ID
         # Other container configuration options...
         pull: true
         ports:
