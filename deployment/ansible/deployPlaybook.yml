@@ -14,10 +14,10 @@
         upgrade: yes
         force_apt_lock: yes  # Optional: Avoid dependency conflicts
 
-    - name: Ensure Docker is installed
-      apt:  # Replace with yum or dnf for other distributions
-        name: docker.io
-        state: present
+    # - name: Ensure Docker is installed
+    #   apt:  # Replace with yum or dnf for other distributions
+    #     name: docker.io
+    #     state: present
 
     - name: Create erpnetwork (if it doesn't exist)
       docker_network:
