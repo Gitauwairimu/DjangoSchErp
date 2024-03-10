@@ -63,9 +63,9 @@ jobs:
 
       - name: Setup ssh
         shell: bash
-            run: |
-              service ssh status
-              eval `ssh-agent -s`
+        run: |
+          service ssh status
+          eval `ssh-agent -s`
 
       - name: Execute Ansible Playbook
         run: |
