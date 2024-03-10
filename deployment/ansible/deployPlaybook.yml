@@ -4,9 +4,27 @@
   gather_facts: true  # Disable fact gathering
 
   tasks:
-    - name: Update package repositories (adjust based on your distro)
-      apt:  # Replace with yum or dnf for other distributions
+    # - name: Update package repositories (adjust based on your distro)
+    #   apt:  # Replace with yum or dnf for other distributions
+    #     update_cache: yes
+
+    - name: Install curl package (if missing)
+      apt:
+        name: curl
+        state: present
+
+    - name: Import Docker GPG key
+      command: curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
+
+    - name: Add Docker repository
+      apt_repository:
+        repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
+        state: present
+
+    - name: Update apt cache
+      apt:
         update_cache: yes
+        cache_valid_time: 3600  # Optional: Cache updates for 1 hour
 
     # - name: Upgrade all packages
     #   apt:  # Replace with yum or dnf for other distributions
