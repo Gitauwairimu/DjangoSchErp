@@ -31,12 +31,12 @@
     #     filters:
     #       image: "{{ 'gitauwairimu/djangoscherp-dev:*' }}"
 
-    - name: Remove images starting with 'gitauwairimu/djangoscherp-dev'
-      docker_image:
-        name: "{{ image.name }}"
-        state: absent
-        loop: "{{ docker_images.results }}"
-        when: image.name.startswith("gitauwairimu/djangoscherp-dev")
+    # - name: Remove images starting with 'gitauwairimu/djangoscherp-dev'
+    #   docker_image:
+    #     name: "{{ image.name }}"
+    #     state: absent
+    #     loop: "{{ docker_images.results }}"
+    #     when: image.name.startswith("gitauwairimu/djangoscherp-dev")
 
     - name: Run djangoscherp-dev container
       docker_container:
