@@ -2,3 +2,6 @@
 # Replace with your EC2 instance's public DNS name or IP address
 18.208.157.80 ansible_port=22  # Optional: Specify port if non-standard
 
+[django_server:vars]
+ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+
