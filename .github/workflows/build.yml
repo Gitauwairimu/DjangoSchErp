@@ -71,12 +71,13 @@ jobs:
         shell: bash
         run: |
           cp /home/runner/work/DjangoSchErp/DjangoSchErp/deployment/ansible/ansible.cfg /tmp/ansible.cfg
+          cp home/runner/work/DjangoSchErp/DjangoSchErp/deployment/ansible/inventory ansible_inventory
 
       - name: Run Ansible playbook
         uses: saubermacherag/ansible-playbook-docker-action@v1.4
         with:
           playbookName: '/home/runner/work/DjangoSchErp/DjangoSchErp/deployment/ansible/deployPlaybook.yml'
-          inventoryFile: '//home/runner/work/DjangoSchErp/DjangoSchErp/deployment/ansible/inventory'
+          inventoryFile: '/home/runner/work/DjangoSchErp/DjangoSchErp/deployment/ansible/inventory'
           keyFile: "/home/runner/work/DjangoSchErp/DjangoSchErp/termapp.pem"
           verbosity: "vv"
 
