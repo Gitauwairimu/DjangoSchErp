@@ -71,7 +71,7 @@ jobs:
         shell: bash
         run: |
           cp /home/runner/work/DjangoSchErp/DjangoSchErp/deployment/ansible/ansible.cfg /tmp/ansible.cfg
-          cp home/runner/work/DjangoSchErp/DjangoSchErp/deployment/ansible/inventory ansible_inventory
+          cp /home/runner/work/DjangoSchErp/DjangoSchErp/deployment/ansible/inventory ansible_inventory
 
       - name: Run Ansible playbook
         uses: saubermacherag/ansible-playbook-docker-action@v1.4
