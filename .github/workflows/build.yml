@@ -70,7 +70,7 @@ jobs:
       - name: Copy ansible.cfg
         shell: bash
         run: |
-          mkdir -p /etc/ansible
+          sudo mkdir -p /etc/ansible
           cp /home/runner/work/DjangoSchErp/DjangoSchErp/deployment/ansible/ansible.cfg /etc/ansible/ansible.cfg
           cp /home/runner/work/DjangoSchErp/DjangoSchErp/deployment/ansible/inventory ansible_inventory
 
