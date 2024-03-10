@@ -17,15 +17,19 @@
     #   command: curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
 
 
-    - name: Download Docker GPG key
-      command: curl -fsSL https://download.docker.com/linux/ubuntu/gpg
-      register: docker_gpg_key
+    # - name: Download Docker GPG key
+    #   command: curl -fsSL https://download.docker.com/linux/ubuntu/gpg
+    #   register: docker_gpg_key
 
-    - name: Import Docker GPG key
-      apt_key:
-        data: "{{ docker_gpg_key.stdout }}"
-        state: present
+    # - name: Import Docker GPG key
+    #   apt_key:
+    #     data: "{{ docker_gpg_key.stdout }}"
+    #     state: present
 
+    - name: Docker key download and add
+      command:
+        - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+        - echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
     - name: Add Docker repository
       apt_repository:
