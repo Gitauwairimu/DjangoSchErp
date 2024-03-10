@@ -8,25 +8,27 @@
     #   apt:  # Replace with yum or dnf for other distributions
     #     update_cache: yes
 
-    - name: Install curl package (if missing)
+    - name: Install aptitude
       apt:
-        name: curl
-        state: present
+        name: aptitude
+        state: latest
+        update_cache: true
 
-    # - name: Import Docker GPG key
-    #   command: curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+    - name: Install required system packages
+      apt:
+        pkg:
+          - apt-transport-https
+          - ca-certificates
+          - curl
+          - software-properties-common
+          - python3-pip
+          - virtualenv
+          - python3-setuptools
+        state: latest
+        update_cache: true
 
 
-    # - name: Download Docker GPG key
-    #   command: curl -fsSL https://download.docker.com/linux/ubuntu/gpg
-    #   register: docker_gpg_key
-
-    # - name: Import Docker GPG key
-    #   apt_key:
-    #     data: "{{ docker_gpg_key.stdout }}"
-    #     state: present
-
-- name: Add Docker GPG apt Key
+    - name: Add Docker GPG apt Key
       apt_key:
         url: https://download.docker.com/linux/ubuntu/gpg
         state: present
@@ -45,7 +47,6 @@
     - name: Install Docker Module for Python
       pip:
         name: docker
-
 
     # - name: Install curl package (if missing)
     #   apt:
