@@ -67,6 +67,7 @@ jobs:
 
       - name: Execute Ansible Playbook
         run: |
+          ssh-copy-id -i termapp.pem ubuntu@18.208.157.80
           ansible-playbook -i /home/runner/work/DjangoSchErp/DjangoSchErp/deployment/ansible/inventory deployment/ansible/deployPlaybook.yml
 
 
