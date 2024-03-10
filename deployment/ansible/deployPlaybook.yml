@@ -24,6 +24,21 @@
         name: erpnetwork
         state: present
 
+    # - name: Remove image
+    #   community.docker.docker_image:
+    #     state: absent
+    #     name: registry.ansible.com/chouseknecht/sinatra
+    #     tag: v1
+
+    - name: ensure a container is running
+      docker_container:
+        name: django-erp
+        state: started
+        image: "gitauwairimu/djangoscherp-dev:$GITHUB_RUN_ID"
+        pull: true
+        ports:
+          - "80:8000"
+
     # - name: Stop and remove djangoscherp-dev containers
     #   docker_container:
     #     state: absent
@@ -38,10 +53,16 @@
     #     loop: "{{ docker_images.results }}"
     #     when: image.name.startswith("gitauwairimu/djangoscherp-dev")
 
-    - name: Run djangoscherp-dev container
-      docker_container:
-        name: django-erp
-        image: gitauwairimu/djangoscherp-dev:$GITHUB_RUN_ID
-        ports:
-          - container_port: 8000
+    # - name: Run djangoscherp-dev container
+    #   docker_container:
+    #     name: django-erp
+    #     image: gitauwairimu/djangoscherp-dev:$GITHUB_RUN_ID
+    #     ports:
+    #       - container_port: 8000
 
+    # - name: Run djangoscherp-dev container
+    #   docker_container:
+    #     name: django-erp
+    #     image: gitauwairimu/djangoscherp-dev:$GITHUB_RUN_ID
+    #     ports:
+    #       - container_port: 8000
