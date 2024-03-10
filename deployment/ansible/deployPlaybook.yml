@@ -1,7 +1,7 @@
 ---
 - hosts: django_server
   become: true  # Assuming privilege escalation required
-  gather_facts: false  # Disable fact gathering
+  gather_facts: true  # Disable fact gathering
 
   tasks:
     - name: Update package repositories (adjust based on your distro)
