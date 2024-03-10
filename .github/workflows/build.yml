@@ -61,6 +61,11 @@ jobs:
         run: |
           sudo apt install ansible -y  # Install Ansible (replace with yum or dnf for other distributions)
 
+      - name: Setup ssh
+        shell: bash
+            run: |
+              service ssh status
+              eval `ssh-agent -s`
 
       - name: Execute Ansible Playbook
         run: |
