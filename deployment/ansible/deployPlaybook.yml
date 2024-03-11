@@ -114,7 +114,7 @@
 
       - name: Find unused images (alternative)
         set_fact:
-          unused_images: "{{ docker_images.results | selectattr('RepoTags', 'in', docker_containers.results | map(attribute='Config.Image') | list ) }}"
+          unused_images: "{{ docker_images.results | selectattr('RepoTags', 'in', docker_image_info.results | map(attribute='Config.Image') | list ) }}"
 
 
     - name: Print unused images
