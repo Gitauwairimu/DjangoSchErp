@@ -115,10 +115,13 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.10.0-rc.1'  # Use a supported Python version
+
       - name: GitOps Update
         uses: simplycubed/gitops-update@0.15
         with:
-          python-version: python-3.13.0
           filename: "deployment.yaml"
           key: "image"
           value: 'gitauwairimu/djangoscherp-dev:${{ github.run_id }}'
