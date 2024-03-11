@@ -123,7 +123,7 @@ jobs:
       - name: GitOps Update
         run: |
           ssh -T git@github.com
-          git clone git@github.com:Gitauwairimu/DjangoSchErpGitOps.git
+          git clone https://github.com/Gitauwairimu/DjangoSchErpGitOps.git
           ls
           cd DjangoSchErpGitOps
           sed -i "s|image: gitauwairimu.*|image: gitauwairimu/djangoscherp-dev:${GITHUB_RUN_ID}|g" deployment.yaml
