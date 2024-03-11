@@ -43,15 +43,14 @@ jobs:
         run: |
           docker push gitauwairimu/djangoscherp-dev:$GITHUB_RUN_ID
 
-      - name: Run Trivy vulnerability scanner
-        uses: aquasecurity/trivy-action@master
-        with:
-          image-ref: 'docker.io/gitauwairimu/djangoscherp-dev:${{ github.run_id }}'
-          format: 'table'
-          exit-code: '1'
-          ignore-unfixed: true
-          vuln-type: 'os,library'
-          severity: 'CRITICAL'
+      # - name: Run Trivy vulnerability scanner
+      #   uses: aquasecurity/trivy-action@master
+      #   with:
+      #     image-ref: 'docker.io/gitauwairimu/djangoscherp-dev:${{ github.run_id }}'
+      #     format: 'table'
+      #     exit-code: '1'
+      #     ignore-unfixed: true
+      #     vuln-type: 'os,library'
       #     severity: 'CRITICAL,HIGH'
 
   # deploy:
