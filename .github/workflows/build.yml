@@ -122,6 +122,7 @@ jobs:
 
       - name: GitOps Update
         run: |
+          ssh -T git@github.com
           git clone git@github.com:Gitauwairimu/DjangoSchErpGitOps.git
           ls
           cd DjangoSchErpGitOps
