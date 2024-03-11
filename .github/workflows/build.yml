@@ -111,14 +111,23 @@ jobs:
 
   GitOps Repo Update:
     runs-on: ubuntu-latest
-
+    steps:
       - uses: actions/checkout@v3
-    
-      - name: Update Version
-        run: |
-            git_hash=$(git rev-parse --short "$GITHUB_SHA")
-            version=$(cat ./charts/helm-example/values.yaml | grep version: | awk '{print $2}')
-            sed -i "s/$version/${GITHUB_REF##*/}-$git_hash/" ./charts/helm-example/values.yaml
+
+      - name: GitOps Update
+        uses: simplycubed/gitops-update@0.15
+        with:
+          filename: "path/to/deployment.yaml"
+          key: "image"
+          value: '${{ secrets.REGISTRY_LOGIN_SERVER }}/sampleapp:${{ github.sha }}'
+          github-deploy-key: ${{ secrets.GITOPS_SSH_PRIVATE_KEY }}
+          github-org-and-repo:  "myorg/app-env"
+
+      # - name: Update Version
+      #   run: |
+      #       git_hash=$(git rev-parse --short "$GITHUB_SHA")
+      #       version=$(cat ./charts/helm-example/values.yaml | grep version: | awk '{print $2}')
+      #       sed -i "s/$version/${GITHUB_REF##*/}-$git_hash/" ./charts/helm-example/values.yaml
             
       # - name: Commit and push changes
       #   uses: devops-infra/action-commit-push@v0.3
