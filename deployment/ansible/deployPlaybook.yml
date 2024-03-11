@@ -83,9 +83,9 @@
       debug:
         msg: "{{container_info.stdout_lines}}"
 
-    # - name: Get all Docker images
-    #   docker_image_info:
-    #   register: docker_images
+    - name: Get all Docker images
+      docker_image_info:
+      register: docker_images
 
     # - name: Get all running containers
     #   docker_containers:
@@ -111,10 +111,6 @@
     # - name: Find unused images
     #   set_fact:
     #     unused_images: "{{ docker_images.results | rejectattr('RepoTags', 'in', docker_containers.results | map(attribute='Image') | list ) }}"
-
-    - name: Get all Docker images
-        docker_image_facts:
-        register: docker_images
 
       - name: Find unused images (alternative)
         set_fact:
