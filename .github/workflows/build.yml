@@ -5,52 +5,53 @@ on:
     branches: [ s3, dev ] # Trigger on pushes to this/these branch(es)
 
 jobs:
-  # build:
-  #   runs-on: ubuntu-latest
-  #   env:
-  #     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-  #     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-  #     AWS_STORAGE_BUCKET_NAME: ${{ secrets.AWS_STORAGE_BUCKET_NAME }}
-  #   steps:
-  #     - uses: actions/checkout@v3
+  build:
+    runs-on: ubuntu-latest
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      AWS_STORAGE_BUCKET_NAME: ${{ secrets.AWS_STORAGE_BUCKET_NAME }}
+    steps:
+      - uses: actions/checkout@v3
 
-  #     - name: Access secrets
-  #       run: |
-  #         DEBUG=${{ secrets.DEBUG }}
-  #         SECRET_KEY=${{ secrets.SECRET_KEY }}
-  #         AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }}
-  #         AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}
-  #         AWS_STORAGE_BUCKET_NAME=${{ secrets.AWS_STORAGE_BUCKET_NAME }}
-  #         # ... access other secrets
+      - name: Access secrets
+        run: |
+          DEBUG=${{ secrets.DEBUG }}
+          SECRET_KEY=${{ secrets.SECRET_KEY }}
+          AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_STORAGE_BUCKET_NAME=${{ secrets.AWS_STORAGE_BUCKET_NAME }}
+          # ... access other secrets
 
-  #     - name: Collectstatic
-  #       run: |
-  #         pip install -r requirements.txt
-  #         python manage.py collectstatic --noinput
+      - name: Collectstatic
+        run: |
+          pip install -r requirements.txt
+          python manage.py collectstatic --noinput
 
-  #     - name: Build Docker image
-  #       run: |
-  #         docker build -t django-img .
-  #         docker tag django-img gitauwairimu/djangoscherp-dev:$GITHUB_RUN_ID
+      - name: Build Docker image
+        run: |
+          docker build -t django-img .
+          docker tag django-img gitauwairimu/djangoscherp-dev:$GITHUB_RUN_ID
 
-  #     - name: Login to Docker Hub
-  #       uses: docker/login-action@v2
-  #       with:
-  #         username: ${{ secrets.DOCKERHUB_USERNAME }}
-  #         password: ${{ secrets.DOCKER_DJANGOSCHERP_DEV_TOKEN }}
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKER_DJANGOSCHERP_DEV_TOKEN }}
 
-  #     - name: Push Docker image
-  #       run: |
-  #         docker push gitauwairimu/djangoscherp-dev:$GITHUB_RUN_ID
+      - name: Push Docker image
+        run: |
+          docker push gitauwairimu/djangoscherp-dev:$GITHUB_RUN_ID
 
-      # - name: Run Trivy vulnerability scanner
-      #   uses: aquasecurity/trivy-action@master
-      #   with:
-      #     image-ref: 'docker.io/gitauwairimu/djangoscherp-dev:${{ github.run_id }}'
-      #     format: 'table'
-      #     exit-code: '1'
-      #     ignore-unfixed: true
-      #     vuln-type: 'os,library'
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: 'docker.io/gitauwairimu/djangoscherp-dev:${{ github.run_id }}'
+          format: 'table'
+          exit-code: '1'
+          ignore-unfixed: true
+          vuln-type: 'os,library'
+          severity: 'CRITICAL'
       #     severity: 'CRITICAL,HIGH'
 
   # deploy:
@@ -111,23 +112,10 @@ jobs:
 
   GitOpsRepoUpdate:
     runs-on: ubuntu-latest
-    # needs: build
+    needs: build
     steps:
-      # - uses: actions/checkout@v3
-
-
-      # - uses: actions/setup-python@v2
-      #   with:
-      #     python-version: '3.10.0-rc.1'  # Use a supported Python version
-
-      # - name: Access secrets
-      #   run: |
-      #     REPO_PAT_DjangoSchErpGitOps=${{ secrets.REPO_PAT_DjangoSchErpGitOps }}
-
       - name: GitOps Update
         run: |
-          # ssh -T git@github.com
-          # git clone https://github.com/Gitauwairimu/DjangoSchErpGitOps.git
           git clone https://Gitauwairimu:${{ secrets.REPO_PAT_DjangoSchErpGitOps }}@github.com/Gitauwairimu/DjangoSchErpGitOps.git
           cd DjangoSchErpGitOps
           sed -i "s|image: gitauwairimu.*|image: gitauwairimu/djangoscherp-dev:${GITHUB_RUN_ID}|g" deployment.yaml
@@ -135,41 +123,6 @@ jobs:
           git config user.email "automate@cloud101.dev"
           git add deployment.yaml
           git commit -m "Image Verson: Auto Update"
-          # git config credential.helper.store.password.PAT ${{ secrets.REPO_PAT_DjangoSchErpGitOps }}
           git push origin main
 
 
-
-
-      # - name: GitOps Update
-      #   uses: simplycubed/gitops-update@0.15
-      #   with:
-      #     filename: "deployment.yaml"
-      #     key: "image"
-      #     value: 'gitauwairimu/djangoscherp-dev:${{ github.run_id }}'
-      #     github-deploy-key: ${{ secrets.GITOPS_SSH_PRIVATE_KEY }}
-      #     github-org-and-repo:  "Gitauwairimu/DjangoSchErpGitOps"
-
-
-
-      # - name: Update Version
-      #   run: |
-      #       git_hash=$(git rev-parse --short "$GITHUB_SHA")
-      #       version=$(cat ./charts/helm-example/values.yaml | grep version: | awk '{print $2}')
-      #       sed -i "s/$version/${GITHUB_REF##*/}-$git_hash/" ./charts/helm-example/values.yaml
-            
-      # - name: Commit and push changes
-      #   uses: devops-infra/action-commit-push@v0.3
-      #   with:
-      #     github_token: ${{ secrets.GITHUB_TOKEN }}
-      #     commit_message: Version updated
-        
-      # - name: Commit and push changes
-      #   uses: devops-infra/action-commit-push@master
-      #   with:
-      #     github_token: "${{ secrets.GITHUB_TOKEN }}"
-      #     add_timestamp: true
-      #     commit_prefix: "[AUTO]"
-      #     commit_message: "Automatic version update commit"
-      #     force: false
-      #     target_branch: gitops
