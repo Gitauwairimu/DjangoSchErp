@@ -71,6 +71,9 @@
         ports:
           - "80:8000"
 
+    - name: Get running Docker containers (using shell and piping)
+      shell: ansible-galaxy collection install community.docker
+      
     - name: Get Docker images
       docker_images:
         name: "{{ image.name }}"
