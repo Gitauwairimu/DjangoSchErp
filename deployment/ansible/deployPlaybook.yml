@@ -54,7 +54,7 @@
       docker_container:
         state: absent
         name: django-erp
-        force: yes  # Forcefully stop container before removal (optional)
+        force_kill: yes  # Forcefully stop container before removal (optional)
         filters:
           image: "{{ 'gitauwairimu/djangoscherp-dev:*' }}"
 
@@ -71,9 +71,9 @@
           - "80:8000"
 
 
-    # - name: Remove images starting with 'gitauwairimu/djangoscherp-dev'
-    #   docker_image:
-    #     name: "{{ image.name }}"
-    #     state: absent
-    #     loop: "{{ docker_images.results }}"
-    #     when: image.name.startswith("gitauwairimu/djangoscherp-dev")
+    - name: Remove images starting with 'gitauwairimu/djangoscherp-dev'
+      docker_image:
+        name: "{{ image.name }}"
+        state: absent
+        loop: "{{ docker_images.results }}"
+        when: image.name.startswith("gitauwairimu/djangoscherp-dev")
