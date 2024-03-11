@@ -43,59 +43,95 @@ jobs:
         run: |
           docker push gitauwairimu/djangoscherp-dev:$GITHUB_RUN_ID
 
-  deploy:
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: 'docker.io/gitauwairimu/djangoscherp-dev:$GITHUB_RUN_ID'
+          format: 'table'
+          exit-code: '1'
+          ignore-unfixed: true
+          vuln-type: 'os,library'
+          severity: 'CRITICAL,HIGH'
+
+  # deploy:
+  #   runs-on: ubuntu-latest
+  #   needs: build
+  #   env:
+  #     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  #     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  #     AWS_STORAGE_BUCKET_NAME: ${{ secrets.AWS_STORAGE_BUCKET_NAME }}
+  #   steps:
+  #     - uses: actions/checkout@v3
+
+  #     - name: Add SSH key
+  #       run: |
+  #         echo "${{ secrets.PEM_KEY }}" >> /home/runner/work/DjangoSchErp/DjangoSchErp/termapp.pem
+  #         chmod 600 /home/runner/work/DjangoSchErp/DjangoSchErp/termapp.pem  # Set appropriate permissions          
+
+  #     - name: Install Ansible
+  #       run: |
+  #         sudo apt install ansible -y  # Install Ansible (replace with yum or dnf for other distributions)
+
+  #     - name: Setup ssh
+  #       shell: bash
+  #       run: |
+  #         service ssh status
+  #         eval `ssh-agent -s`
+
+  #     - name: Copy ansible.cfg
+  #       shell: bash
+  #       run: |
+  #         sudo mkdir -p /etc/ansible
+  #         sudo cp /home/runner/work/DjangoSchErp/DjangoSchErp/deployment/ansible/ansible.cfg /etc/ansible/ansible.cfg
+  #         cp /home/runner/work/DjangoSchErp/DjangoSchErp/deployment/ansible/inventory ansible_inventory
+
+  #     # - name: Run Ansible playbook
+  #     #   uses: saubermacherag/ansible-playbook-docker-action@v1.4
+  #     #   with:
+  #     #     playbookName: '/home/runner/work/DjangoSchErp/DjangoSchErp/deployment/ansible/deployPlaybook.yml'
+  #     #     inventoryFile: 'ansible_inventory'
+  #     #     keyFile: "/home/runner/work/DjangoSchErp/DjangoSchErp/termapp.pem"
+  #     #     verbosity: "vv"
+
+  #     # - name: Run Ansible playbook
+  #     #   uses: dawidd6/action-ansible-playbook@v2.5.0
+  #     #   with:
+  #     #     playbook: deployment/ansible/deployPlaybook.yml # path to your Ansible playbook
+  #     #     directory: ./
+  #     #     key: ${{ secrets.PEM_KEY }} # the ssh private key for ansible to use to connect to the servers, stored as "ansible_ssh_private_key" in the GitHub secrets
+  #     #     inventory: /home/runner/work/DjangoSchErp/DjangoSchErp/deployment/ansible/inventory
+  #     #     # inventory: ${{ secrets.ansible_inventory }} # the ansible inventory to use, stored as "ansible_inventory" in the GitHub secrets
+
+
+
+  #     - name: Execute Ansible Playbook
+  #       run: |
+  #         ansible-playbook -i /home/runner/work/DjangoSchErp/DjangoSchErp/deployment/ansible/inventory deployment/ansible/deployPlaybook.yml
+
+
+  GitOps Repo Update:
     runs-on: ubuntu-latest
-    needs: build
-    env:
-      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      AWS_STORAGE_BUCKET_NAME: ${{ secrets.AWS_STORAGE_BUCKET_NAME }}
-    steps:
+
       - uses: actions/checkout@v3
-
-      - name: Add SSH key
+    
+      - name: Update Version
         run: |
-          echo "${{ secrets.PEM_KEY }}" >> /home/runner/work/DjangoSchErp/DjangoSchErp/termapp.pem
-          chmod 600 /home/runner/work/DjangoSchErp/DjangoSchErp/termapp.pem  # Set appropriate permissions          
-
-      - name: Install Ansible
-        run: |
-          sudo apt install ansible -y  # Install Ansible (replace with yum or dnf for other distributions)
-
-      - name: Setup ssh
-        shell: bash
-        run: |
-          service ssh status
-          eval `ssh-agent -s`
-
-      - name: Copy ansible.cfg
-        shell: bash
-        run: |
-          sudo mkdir -p /etc/ansible
-          sudo cp /home/runner/work/DjangoSchErp/DjangoSchErp/deployment/ansible/ansible.cfg /etc/ansible/ansible.cfg
-          cp /home/runner/work/DjangoSchErp/DjangoSchErp/deployment/ansible/inventory ansible_inventory
-
-      # - name: Run Ansible playbook
-      #   uses: saubermacherag/ansible-playbook-docker-action@v1.4
+            git_hash=$(git rev-parse --short "$GITHUB_SHA")
+            version=$(cat ./charts/helm-example/values.yaml | grep version: | awk '{print $2}')
+            sed -i "s/$version/${GITHUB_REF##*/}-$git_hash/" ./charts/helm-example/values.yaml
+            
+      # - name: Commit and push changes
+      #   uses: devops-infra/action-commit-push@v0.3
       #   with:
-      #     playbookName: '/home/runner/work/DjangoSchErp/DjangoSchErp/deployment/ansible/deployPlaybook.yml'
-      #     inventoryFile: 'ansible_inventory'
-      #     keyFile: "/home/runner/work/DjangoSchErp/DjangoSchErp/termapp.pem"
-      #     verbosity: "vv"
-
-      # - name: Run Ansible playbook
-      #   uses: dawidd6/action-ansible-playbook@v2.5.0
-      #   with:
-      #     playbook: deployment/ansible/deployPlaybook.yml # path to your Ansible playbook
-      #     directory: ./
-      #     key: ${{ secrets.PEM_KEY }} # the ssh private key for ansible to use to connect to the servers, stored as "ansible_ssh_private_key" in the GitHub secrets
-      #     inventory: /home/runner/work/DjangoSchErp/DjangoSchErp/deployment/ansible/inventory
-      #     # inventory: ${{ secrets.ansible_inventory }} # the ansible inventory to use, stored as "ansible_inventory" in the GitHub secrets
-
-
-
-      - name: Execute Ansible Playbook
-        run: |
-          ansible-playbook -i /home/runner/work/DjangoSchErp/DjangoSchErp/deployment/ansible/inventory deployment/ansible/deployPlaybook.yml
-
-
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      #     commit_message: Version updated
+        
+      - name: Commit and push changes
+        uses: devops-infra/action-commit-push@master
+        with:
+          github_token: "${{ secrets.GITHUB_TOKEN }}"
+          add_timestamp: true
+          commit_prefix: "[AUTO]"
+          commit_message: "Automatic version update commit"
+          force: false
+          target_branch: gitops
