@@ -55,9 +55,7 @@
         state: absent
         name: django-erp
         force_kill: yes  # Forcefully stop container before removal (optional)
-        filters:
-          image: "{{ 'gitauwairimu/djangoscherp-dev:*' }}"
-
+       
     - name: Build dynamic image tag
       set_fact:
         image_tag: "gitauwairimu/djangoscherp-dev:{{ lookup('env', 'GITHUB_RUN_ID') }}"  # Access CI_RUN_ID environment variable
