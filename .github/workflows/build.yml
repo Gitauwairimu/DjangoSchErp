@@ -2,7 +2,7 @@ name: Django Build and Push Image
 
 on:
   push:
-    branches: [ s3 ] # Trigger on pushes to master branch
+    branches: [ s3, dev ] # Trigger on pushes to this/these branch(es)
 
 jobs:
   build:
@@ -96,7 +96,6 @@ jobs:
 
       - name: Execute Ansible Playbook
         run: |
-          #ssh-copy-id -i /home/runner/work/DjangoSchErp/DjangoSchErp/termapp.pem ubuntu@18.208.157.80
           ansible-playbook -i /home/runner/work/DjangoSchErp/DjangoSchErp/deployment/ansible/inventory deployment/ansible/deployPlaybook.yml
 
 
