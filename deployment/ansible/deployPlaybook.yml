@@ -1,12 +1,9 @@
 ---
 - hosts: django_server
   become: true  # Assuming privilege escalation required
-  gather_facts: true  # Disable fact gathering
+  gather_facts: true  # Enable fact gathering
 
   tasks:
-    # - name: Update package repositories (adjust based on your distro)
-    #   apt:  # Replace with yum or dnf for other distributions
-    #     update_cache: yes
 
     - name: Install aptitude
       apt:
@@ -26,7 +23,6 @@
           - python3-setuptools
         state: latest
         update_cache: true
-
 
     - name: Add Docker GPG apt Key
       apt_key:
@@ -48,65 +44,19 @@
       pip:
         name: docker
 
-    # - name: Install curl package (if missing)
-    #   apt:
-    #     name: curl
-    #     state: present
-
-    # - name: Import Docker GPG key
-    #   command: curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
-
-    # - name: Add Docker repository
-    #   apt_repository:
-    #     repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
-    #     state: present
-
-    # - name: Update apt cache
-    #   apt:
-    #     update_cache: yes
-    #     cache_valid_time: 3600  # Optional: Cache updates for 1 hour
-
-
     - name: Create erpnetwork (if it doesn't exist)
       docker_network:
         name: erpnetwork
         state: present
 
-    # - name: Remove image
-    #   community.docker.docker_image:
-    #     state: absent
-    #     name: registry.ansible.com/chouseknecht/sinatra
-    #     tag: v1
-
-    # - name: ensure a container is running
-    #   docker_container:
-    #     name: django-erp
-    #     state: started
-    #     image: "gitauwairimu/djangoscherp-dev:$GITHUB_RUN_ID"
-    #     pull: true
-    #     ports:
-    #       - "80:8000"
-
     - name: Build dynamic image tag
       set_fact:
-        # image_tag: "gitauwairimu/djangoscherp-dev:{{ github.run_id }}"  # Build tag using Jinja2
         image_tag: "gitauwairimu/djangoscherp-dev:{{ lookup('env', 'GITHUB_RUN_ID') }}"  # Access CI_RUN_ID environment variable
-
-    # - name: Build dynamic image tag
-    #   set_fact:
-    #     image_tag: "gitauwairimu/djangoscherp-dev:{{ github.run_id }}"  # Build tag using Jinja2
-    #   vars:
-    #     github.run_id:  '$GITHUB_RUN_ID' # Assuming 'github' is defined elsewhere in your playbook/role
-    #       # run_id : "your_workflow_run_id"  # Replace with the actual value
-    # # ... other tasks
-
 
     - name: Ensure container is running
       docker_container:
         name: django-erp
         image: "{{ image_tag }}"  # Use the constructed image_tag variable
-        # image: gitauwairimu/djangoscherp-dev:$GITHUB_RUN_ID
-        # Other container configuration options...
         pull: true
         ports:
           - "80:8000"
@@ -124,17 +74,3 @@
     #     state: absent
     #     loop: "{{ docker_images.results }}"
     #     when: image.name.startswith("gitauwairimu/djangoscherp-dev")
-
-    # - name: Run djangoscherp-dev container
-    #   docker_container:
-    #     name: django-erp
-    #     image: gitauwairimu/djangoscherp-dev:$GITHUB_RUN_ID
-    #     ports:
-    #       - container_port: 8000
-
-    # - name: Run djangoscherp-dev container
-    #   docker_container:
-    #     name: django-erp
-    #     image: gitauwairimu/djangoscherp-dev:$GITHUB_RUN_ID
-    #     ports:
-    #       - container_port: 8000
