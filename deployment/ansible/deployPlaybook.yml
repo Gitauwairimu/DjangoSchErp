@@ -75,11 +75,14 @@
       docker_image_info:
       register: docker_images
 
-    - name: Get running containers
-      docker_container_info:
-        name: "{{ item.name }}"  # Optional: Filter by name if needed
-      loop: "{{ all_containers.results }}"  # Replace with your list if applicable
+    - name: Get all running containers
+      docker_containers:  # Assuming this retrieves all containers
       register: docker_containers
+
+    - name: Print running container information (optional)
+      debug:
+        msg: "Running containers: {{ docker_containers.results }}"
+
 
     # - name: Get running containers
     #   docker_container_info:
