@@ -1,5 +1,8 @@
 ---
 - hosts: django_server
+
+  collections:
+      - community.docker
   become: true  # Assuming privilege escalation required
   gather_facts: true  # Enable fact gathering
 
