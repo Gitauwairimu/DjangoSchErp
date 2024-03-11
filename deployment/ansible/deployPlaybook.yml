@@ -83,14 +83,6 @@
       debug:
         msg: "{{container_info.stdout_lines}}"
 
-    # - name: Get all Docker images
-    #   docker_image_info:
-    #   register: docker_images
-
-
-    # - name: Print images information (optional)
-    #   debug:
-    #     msg: "Existing images: {{ docker_images.results }}"
 
     - name: Clean up Docker images
       docker_prune:
@@ -105,17 +97,3 @@
     - name: Print images information (optional)
       debug:
         msg: "Existing images: {{ docker_images.stdout }}"
-
-    # - name: List Docker images
-    #   shell:
-    #   command:
-    #     docker images ls
-
-    # - name: Get all Docker images
-    #   docker_image_info:
-    #   register: docker_images
-
-
-    # - name: Print images information (optional)
-    #   debug:
-    #     msg: "Existing images: {{ docker_images.results }}"
