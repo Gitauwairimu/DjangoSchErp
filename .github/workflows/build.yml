@@ -46,7 +46,7 @@ jobs:
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: 'docker.io/gitauwairimu/djangoscherp-dev:$GITHUB_RUN_ID'
+          image-ref: 'docker.io/gitauwairimu/djangoscherp-dev:${{ github.run_id }}'
           format: 'table'
           exit-code: '1'
           ignore-unfixed: true
@@ -118,11 +118,11 @@ jobs:
       - name: GitOps Update
         uses: simplycubed/gitops-update@0.15
         with:
-          filename: "path/to/deployment.yaml"
+          filename: "deployment.yaml"
           key: "image"
           value: '${{ secrets.REGISTRY_LOGIN_SERVER }}/sampleapp:${{ github.sha }}'
           github-deploy-key: ${{ secrets.GITOPS_SSH_PRIVATE_KEY }}
-          github-org-and-repo:  "myorg/app-env"
+          github-org-and-repo:  "Gitauwairimu/DjangoSchErpGitOps"
 
       # - name: Update Version
       #   run: |
