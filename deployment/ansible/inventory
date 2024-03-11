@@ -1,5 +1,5 @@
 [django_server]
-34.229.152.170
+54.208.123.238
 
 [django_server:vars]
 ansible_ssh_common_args='-o StrictHostKeyChecking=no'
