@@ -128,7 +128,7 @@ jobs:
         run: |
           # ssh -T git@github.com
           # git clone https://github.com/Gitauwairimu/DjangoSchErpGitOps.git
-          git clone https://Gitauwairimu:$REPO_PAT_DjangoSchErpGitOps@github.com/Gitauwairimu/DjangoSchErpGitOps.git
+          git clone https://Gitauwairimu:${{ secrets.REPO_PAT_DjangoSchErpGitOps }}@github.com/Gitauwairimu/DjangoSchErpGitOps.git
           cd DjangoSchErpGitOps
           sed -i "s|image: gitauwairimu.*|image: gitauwairimu/djangoscherp-dev:${GITHUB_RUN_ID}|g" deployment.yaml
           git config user.name "CharlesAUTO"
