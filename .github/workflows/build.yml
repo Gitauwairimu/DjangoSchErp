@@ -127,11 +127,11 @@ jobs:
           ls
           cd DjangoSchErpGitOps
           sed -i "s|image: gitauwairimu.*|image: gitauwairimu/djangoscherp-dev:${GITHUB_RUN_ID}|g" deployment.yaml
-          cat deployment.yaml
+          git config user.name "CharlesAUTO"
+          git config user.email "automate@cloud101.dev"
           git add deployment.yaml
           git commit -m "Image Verson: Auto Update"
-          git config user.name "Charles AUTO"
-          git config user.email "automate@cloud101.dev"
+          
           git push origin main
 
 
