@@ -108,9 +108,18 @@
     #   loop: "{{ docker_containers.results }}"
     #   register: docker_containers
 
-    - name: Find unused images
-      set_fact:
-        unused_images: "{{ docker_images.results | rejectattr('RepoTags', 'in', docker_containers.results | map(attribute='Image') | list ) }}"
+    # - name: Find unused images
+    #   set_fact:
+    #     unused_images: "{{ docker_images.results | rejectattr('RepoTags', 'in', docker_containers.results | map(attribute='Image') | list ) }}"
+
+    - name: Get all Docker images
+        docker_image_facts:
+        register: docker_images
+
+      - name: Find unused images (alternative)
+        set_fact:
+          unused_images: "{{ docker_images.results | selectattr('RepoTags', 'in', docker_containers.results | map(attribute='Config.Image') | list ) }}"
+
 
     - name: Print unused images
       debug:
