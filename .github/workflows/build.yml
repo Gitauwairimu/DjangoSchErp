@@ -135,8 +135,8 @@ jobs:
           git config user.email "automate@cloud101.dev"
           git add deployment.yaml
           git commit -m "Image Verson: Auto Update"
-          git config credential.helper 'store --git credential-store'
-          git config credential.helper.store.username Gitauwairimu
+          # git config credential.helper 'store --git credential-store'
+          # git config credential.helper.store.username Gitauwairimu
           git config credential.helper.store.password.PAT ${{ secrets.REPO_PAT_DjangoSchErpGitOps }}
           git push origin main
 
