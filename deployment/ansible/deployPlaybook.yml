@@ -71,19 +71,37 @@
         ports:
           - "80:8000"
 
-    - name: Get running Docker containers (using shell and piping)
-      shell: ansible-galaxy collection install community.docker
-      
-    - name: Get Docker images
-      docker_images:
-        name: "{{ image.name }}"
+    - name: Get all Docker images
+      docker_image_facts:
       register: docker_images
 
-    - name: Remove images starting with 'gitauwairimu/djangoscherp-dev'
-      docker_image:
+    - name: Get running containers
+      docker_container_info:
         name: "{{ item.name }}"
-        state: absent
-      loop: "{{ docker_images.results | selectattr('name', 'startswith', 'gitauwairimu/djangoscherp-dev') }}"
+      loop: "{{ docker_containers.results }}"
+      register: docker_containers
+
+    - name: Find unused images
+      set_fact:
+        unused_images: "{{ docker_images.results | rejectattr('RepoTags', 'in', docker_containers.results | map(attribute='Image') | list ) }}"
+
+    - name: Print unused images
+      debug:
+        msg: "Unused images: {{ unused_images }}"
+
+    # - name: Get running Docker containers (using shell and piping)
+    #   shell: ansible-galaxy collection install community.docker
+
+    # - name: Get Docker images
+    #   docker_images:
+    #     name: "{{ image.name }}"
+    #   register: docker_images
+
+    # - name: Remove images starting with 'gitauwairimu/djangoscherp-dev'
+    #   docker_image:
+    #     name: "{{ item.name }}"
+    #     state: absent
+    #   loop: "{{ docker_images.results | selectattr('name', 'startswith', 'gitauwairimu/djangoscherp-dev') }}"
 
 
     # - name: Remove images starting with 'gitauwairimu/djangoscherp-dev'
