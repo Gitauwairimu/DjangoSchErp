@@ -118,9 +118,10 @@ jobs:
       - name: GitOps Update
         uses: simplycubed/gitops-update@0.15
         with:
+          python-version: python-3.13.0
           filename: "deployment.yaml"
           key: "image"
-          value: '${{ secrets.REGISTRY_LOGIN_SERVER }}/sampleapp:${{ github.sha }}'
+          value: 'gitauwairimu/djangoscherp-dev:${{ github.run_id }}'
           github-deploy-key: ${{ secrets.GITOPS_SSH_PRIVATE_KEY }}
           github-org-and-repo:  "Gitauwairimu/DjangoSchErpGitOps"
 
