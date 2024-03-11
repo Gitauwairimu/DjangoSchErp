@@ -124,8 +124,17 @@ jobs:
         run: |
           git clone git@github.com:Gitauwairimu/DjangoSchErpGitOps.git
           ls
+          cd DjangoSchErpGitOps
           sed -i "s|image: gitauwairimu.*|image: gitauwairimu/djangoscherp-dev:${GITHUB_RUN_ID}|g" deployment.yaml
           cat deployment.yaml
+          git add deployment.yaml
+          git commit -m "Image Verson: Auto Update"
+          git config user.name "Charles AUTO"
+          git config user.email "automate@cloud101.dev"
+          git push origin main
+
+
+
 
       # - name: GitOps Update
       #   uses: simplycubed/gitops-update@0.15
