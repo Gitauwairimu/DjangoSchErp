@@ -122,7 +122,10 @@ jobs:
 
       - name: GitOps Update
         run: |
-          - git clone
+          git clone git@github.com:Gitauwairimu/DjangoSchErpGitOps.git
+          ls
+          sed -i "s|image: gitauwairimu.*|image: gitauwairimu/djangoscherp-dev:${GITHUB_RUN_ID}|g" deployment.yaml
+          cat deployment.yaml
 
       # - name: GitOps Update
       #   uses: simplycubed/gitops-update@0.15
