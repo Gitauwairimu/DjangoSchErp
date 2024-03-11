@@ -77,9 +77,15 @@
 
     - name: Get running containers
       docker_container_info:
-        name: "{{ item.name }}"
-      loop: "{{ docker_containers.results }}"
+        name: "{{ item.name }}"  # Optional: Filter by name if needed
+      loop: "{{ all_containers.results }}"  # Replace with your list if applicable
       register: docker_containers
+
+    # - name: Get running containers
+    #   docker_container_info:
+    #     name: "{{ item.name }}"
+    #   loop: "{{ docker_containers.results }}"
+    #   register: docker_containers
 
     - name: Find unused images
       set_fact:
