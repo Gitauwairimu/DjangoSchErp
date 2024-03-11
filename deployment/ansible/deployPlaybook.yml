@@ -53,6 +53,7 @@
     - name: Stop and remove existing djangoscherp-dev containers
       docker_container:
         state: absent
+        name: django-erp
         force: yes  # Forcefully stop container before removal (optional)
         filters:
           image: "{{ 'gitauwairimu/djangoscherp-dev:*' }}"
