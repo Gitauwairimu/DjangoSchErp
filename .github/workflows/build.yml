@@ -130,7 +130,7 @@ jobs:
     needs:
       - GitOpsRepoUpdate
       - build
-      - deploy
+      # - deploy
     name: Pass - Notify on Slack
     runs-on: ubuntu-latest
     steps:
@@ -145,7 +145,7 @@ jobs:
     needs:
       - GitOpsRepoUpdate
       - build
-      - deploy
+      # - deploy
     name: Failed - Notify on Slack
     runs-on: ubuntu-latest
     if: failure() || cancelled()
