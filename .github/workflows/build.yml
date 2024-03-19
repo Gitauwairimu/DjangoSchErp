@@ -144,7 +144,7 @@ jobs:
 
   GitOpsRepoUpdate:
     runs-on: ubuntu-latest
-    needs: build
+    needs: slack_success
     steps:
       - name: GitOps Update
         run: |
