@@ -125,3 +125,34 @@ jobs:
           git push origin main
 
 
+
+  slack_success:
+    needs:
+      - GitOpsRepoUpdate
+      - build
+      - deploy
+    name: Pass - Notify on Slack
+    runs-on: ubuntu-latest
+    steps:
+      - uses: slackapi/slack-github-action@v1.23.0
+        with:
+          channel-id: "ch-djangoerp-cicd"
+          slack-message: "GitHub build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+
+  slack_fail:
+    needs:
+      - GitOpsRepoUpdate
+      - build
+      - deploy
+    name: Failed - Notify on Slack
+    runs-on: ubuntu-latest
+    if: failure() || cancelled()
+    steps:
+      - uses: slackapi/slack-github-action@v1.23.0
+        with:
+          channel-id: "ch-djangoerp-cicd"
+          slack-message: "GitHub build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
